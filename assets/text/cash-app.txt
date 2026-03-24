@@ -1,0 +1,6 @@
+Cash Application Automation Notes
+
+- Add your real implementation details here.
+- Mention Gemini API + GCP integration points.
+- Mention extraction accuracy and reconciliation impact.
+- Add PDD/SDD links or summaries.

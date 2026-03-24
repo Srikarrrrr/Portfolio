@@ -1,0 +1,20 @@
+Power BI Automation (Email-to-Dashboard)
+
+Overview
+Automated pipeline that captures daily data files from email, stores them in a shared folder, and refreshes Power BI dashboards on schedule for consistent, up-to-date reporting.
+
+Key Features
+- Automated email attachment capture using Power Automate
+- Automatic file download and centralized storage (OneDrive/SharePoint)
+- Daily scheduled dataset refresh at 10:00 AM
+- Dashboards update with the latest data without manual effort
+
+Tech Stack
+- Microsoft Power BI
+- Power Automate
+- Microsoft Outlook
+- OneDrive / SharePoint
+
+Impact
+- Manual handling eliminated for daily refresh operations
+- Reliable reporting cadence with minimal data latency

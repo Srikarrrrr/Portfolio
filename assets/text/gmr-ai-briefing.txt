@@ -1,0 +1,8 @@
+GMR AI Briefing Agent Notes
+
+Replace this content with your actual agent write-up.
+
+- Data sources scraped
+- Analysis method
+- Insight quality criteria
+- Monday schedule and delivery mail format

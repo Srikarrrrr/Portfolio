@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>GMR AI Intelligence Briefing</title>
+</head>
+<body style="margin:0;padding:0;background:#F1F4F8;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0"
+       style="background:#F1F4F8;padding:28px 0;">
+  <tr><td align="center">
+  <table width="640" cellpadding="0" cellspacing="0"
+         style="max-width:640px;width:100%;box-shadow:0 2px 16px rgba(13,27,46,0.10);">
+
+    <!-- ═══════════════════════════════
+         HEADER
+    ═══════════════════════════════ -->
+    <tr>
+      <td style="background:#0D1B2E;padding:0;border-radius:4px 4px 0 0;">
+
+        <!-- top accent line -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="4" style="background:#2563EB;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#16A34A;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#9333EA;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#EA580C;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#E11D48;height:2px;font-size:1px;">&nbsp;</td>
+            <td style="background:#0284C7;height:2px;font-size:1px;">&nbsp;</td>
+          </tr>
+        </table>
+
+        <!-- main header content -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding:26px 32px 20px 32px;">
+
+              <!-- GMR logo + title row -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:14px;">
+                <tr>
+                  <td width="110" valign="middle">
+                    <div style="background:#FFFFFF;border-radius:6px;padding:8px 12px;display:inline-block;border:1px solid #E5E9F0;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+                      <img src="data:image/png;base64,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" 
+                           width="95" height="40" alt="GMR Group" 
+                           style="display:block;width:95px;height:auto;object-fit:contain;"/>
+                    </div>
+                  </td>
+                  <td style="padding-left:18px;border-left:1px solid rgba(255,255,255,0.08);" valign="middle">
+                    <p style="margin:0 0 3px 0;font-family:Courier New,Courier,monospace;
+                                font-size:8px;font-weight:700;color:#2563EB;
+                                letter-spacing:2.5px;text-transform:uppercase;">
+                      DIGITAL TRANSFORMATION TEAM</p>
+                    <p style="margin:0;font-size:22px;font-weight:700;color:#FFFFFF;
+                                letter-spacing:-0.5px;line-height:1.15;
+                                font-family:Arial,Helvetica,sans-serif;">
+                      AI Intelligence Briefing</p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+        <!-- section index bar -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="background:rgba(255,255,255,0.04);
+                        border-top:1px solid rgba(255,255,255,0.06);
+                        padding:9px 32px;">
+              <p style="margin:0;font-family:Courier New,Courier,monospace;
+                          font-size:9px;color:#475569;letter-spacing:0.5px;">
+                INDEX &rarr;
+                &nbsp;<span style="color:#2563EB;">HEADLINES</span>
+                &nbsp;&#183;&nbsp;<span style="color:#16A34A;">MODELS</span>
+                &nbsp;&#183;&nbsp;<span style="color:#EA580C;">BUSINESS</span>
+                &nbsp;&#183;&nbsp;<span style="color:#9333EA;">RESEARCH</span>
+                &nbsp;&#183;&nbsp;<span style="color:#E11D48;">POLICY</span>
+                &nbsp;&#183;&nbsp;<span style="color:#0284C7;">QUICK BITES</span>
+                &nbsp;&#183;&nbsp;<span style="color:#15803D;">TAKEAWAYS</span>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════
+         BODY
+    ═══════════════════════════════ -->
+    <tr>
+      <td style="background:#FFFFFF;padding:0 32px 32px 32px;">
+
+        <table width="100%" cellpadding="0" cellspacing="0">
+
+          <!-- brief intro line -->
+          <tr>
+            <td style="padding:22px 0 18px 0;border-bottom:1px solid #E5E9F0;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;
+                          font-size:12px;color:#64748B;line-height:1.8;">
+                Daily AI intelligence compiled by the GMR Digital Transformation Team.
+                Covers model releases, enterprise adoption, research advances and policy
+                developments relevant to GMR Group operations and strategy.
+              </p>
+            </td>
+          </tr>
+
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#EFF6FF;color:#1D4ED8;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #2563EB22;"><span style="color:#2563EB;margin-right:5px;">&#9632;</span>TOP HEADLINES</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  Most significant AI developments today</p>
+              </td>
+            </tr></table>
+            
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #2563EB;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#1D4ED8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // OpenAI Blog</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    GPT-5 Breaks New Benchmarks in Reasoning Tasks</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    OpenAI announces GPT-5 with 40% improvement in complex reasoning. Critical for enterprise AI deployment and decision-making systems.</p>
+                  <a href="https://openai.com/blog/gpt5"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#2563EB;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #2563EB;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#1D4ED8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Google DeepMind</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Gemini 2.0 Multimodal Capabilities Released</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Google releases Gemini 2.0 with advanced video understanding and real-time processing. Key implications for content analysis and automation.</p>
+                  <a href="https://deepmind.google/blog/gemini-2"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#2563EB;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #2563EB;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#1D4ED8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Meta AI</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Llama 3.5 Open Source Model Available</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Meta releases Llama 3.5, a fully open-source LLM rivaling commercial offerings. Significant shift in enterprise AI accessibility.</p>
+                  <a href="https://ai.meta.com/blog/llama-3-5"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#2563EB;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #2563EB;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#1D4ED8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Reuters</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    EU AI Act Enforcement Begins Next Quarter</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    European Union begins enforcement of AI Act regulations. Compliance deadlines critical for multinational organizations.</p>
+                  <a href="https://reuters.com/ai-regulation"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#2563EB;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+          </td>
+        </tr>
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#F0FDF4;color:#166534;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #16A34A22;"><span style="color:#16A34A;margin-right:5px;">&#9632;</span>MODELS &amp; TOOLS</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  New AI model releases, product launches and capability updates</p>
+              </td>
+            </tr></table>
+            
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #16A34A;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#166534;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Anthropic</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Claude 4 API Now Available</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Anthropic launches Claude 4 with expanded context window and faster inference. Enhanced enterprise adoption potential.</p>
+                  <a href="https://anthropic.com/claude-4"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#16A34A;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #16A34A;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#166534;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Hugging Face</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Mistral 3 Model Released</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    New open-source model optimized for efficiency. Relevant for cost-conscious enterprise deployments.</p>
+                  <a href="https://huggingface.co/mistral-3"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#16A34A;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #16A34A;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#166534;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Microsoft</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Copilot Pro Enterprise Features Expand</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Microsoft Copilot Pro gains new enterprise capabilities for business process automation.</p>
+                  <a href="https://microsoft.com/copilot-pro"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#16A34A;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+          </td>
+        </tr>
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#FFF7ED;color:#9A3412;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #EA580C22;"><span style="color:#EA580C;margin-right:5px;">&#9632;</span>BUSINESS &amp; ENTERPRISE</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  Enterprise AI adoption, strategy and consulting landscape</p>
+              </td>
+            </tr></table>
+            
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #EA580C;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#9A3412;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // McKinsey</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Enterprise AI Adoption Reaches 55% Among Fortune 500</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    McKinsey report shows majority of large enterprises now deploying AI solutions. Cost savings averaging 30% in pilot programs.</p>
+                  <a href="https://mckinsey.com/ai-adoption"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#EA580C;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #EA580C;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#9A3412;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Accenture</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    AI Skills Gap Widens, Training Programs Surge</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Enterprise demand for AI expertise outpaces supply. Training and upskilling initiatives critical for competitive advantage.</p>
+                  <a href="https://accenture.com/ai-skills"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#EA580C;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #EA580C;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#9A3412;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Deloitte</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    AI ROI Exceeds Expectations in Year Two</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Late-stage AI projects show 2-3x higher returns than initial projections. Strong business case for continued investment.</p>
+                  <a href="https://deloitte.com/ai-roi"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#EA580C;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+          </td>
+        </tr>
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#FAF5FF;color:#6B21A8;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #9333EA22;"><span style="color:#9333EA;margin-right:5px;">&#9632;</span>RESEARCH &amp; BREAKTHROUGHS</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  Academic papers, benchmarks and technical advances</p>
+              </td>
+            </tr></table>
+            
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #9333EA;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#6B21A8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Stanford HAI</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    New Research on AI Interpretability Published</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Stanford researchers develop breakthrough techniques for understanding neural network decision-making. Important for regulatory compliance.</p>
+                  <a href="https://stanford.edu/hai-interpretability"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#9333EA;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #9333EA;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#6B21A8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // MIT CSAIL</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Efficient Transformers: 50% Faster Inference</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    MIT breakthrough reduces computational requirements in transformer models. Major implications for deployment scalability.</p>
+                  <a href="https://csail.mit.edu/efficient-transformers"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#9333EA;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #9333EA;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#6B21A8;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // Berkeley AI Research</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Federated Learning Framework Released</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    New framework enables privacy-preserving AI training across distributed datasets. Critical for regulated industries.</p>
+                  <a href="https://berkeley.edu/federated-learning"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#9333EA;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+          </td>
+        </tr>
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#FFF1F2;color:#9F1239;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #E11D4822;"><span style="color:#E11D48;margin-right:5px;">&#9632;</span>POLICY &amp; GOVERNANCE</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  Regulation, ethics, government and compliance updates</p>
+              </td>
+            </tr></table>
+            
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #E11D48;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#9F1239;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // US Congress</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    Senate Approves AI Regulation Framework</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    Senate passes comprehensive AI regulation requiring transparency and accountability measures. Compliance timeline: 18 months.</p>
+                  <a href="https://congress.gov/ai-regulation"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#E11D48;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 14px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border:1px solid #E5E9F0;border-radius:3px;background:#FFFFFF;">
+              <tr>
+                <td style="border-left:2px solid #E11D48;padding:14px 18px;">
+                  <p style="margin:0 0 6px 0;font-family:Courier New,Courier,monospace;
+                              font-size:9px;font-weight:700;color:#9F1239;
+                              letter-spacing:1.5px;text-transform:uppercase;">
+                    // UK ICO</p>
+                  <p style="margin:0 0 8px 0;font-size:13px;font-weight:700;color:#0D1B2E;
+                              line-height:1.55;font-family:Arial,Helvetica,sans-serif;">
+                    AI Data Privacy Guidelines Updated</p>
+                  <p style="margin:0 0 12px 0;font-size:11.5px;color:#4A5568;
+                              line-height:1.85;font-family:Arial,Helvetica,sans-serif;">
+                    UK Information Commissioner's Office releases updated guidance on AI and data protection. Affects GDPR compliance strategies.</p>
+                  <a href="https://ico.org.uk/ai-privacy"
+                     style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#E11D48;text-decoration:none;
+                             letter-spacing:1px;text-transform:uppercase;">
+                    [ READ FULL ARTICLE &rarr; ]</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+          </td>
+        </tr>
+          
+        <tr>
+          <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="padding-bottom:14px;">
+                <span style="display:inline-block;background:#F0F9FF;color:#0C4A6E;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #0284C722;"><span style="color:#0284C7;margin-right:5px;">&#9632;</span>QUICK BITES</span>
+                <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                            font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                  Short-form updates worth noting</p>
+              </td>
+            </tr></table>
+            <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  01</span>
+              </td>
+              <td>
+                <a href="https://openai.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">ChatGPT Pro subscribers now 5M+ globally</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  02</span>
+              </td>
+              <td>
+                <a href="https://example.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">AI-generated content moderation accuracy reaches 98%</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  03</span>
+              </td>
+              <td>
+                <a href="https://example.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">Enterprise GenAI spending projected to reach $50B in 2026</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  04</span>
+              </td>
+              <td>
+                <a href="https://nvidia.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">NVIDIA AI chip shortages ease, availability improves</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  05</span>
+              </td>
+              <td>
+                <a href="https://aws.amazon.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">Amazon adds AI shopping assistant to all AWS accounts</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom:1px solid #F1F4F9;padding:9px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="28" valign="top" style="padding-top:1px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:9px;
+                             font-weight:700;color:#0284C7;letter-spacing:1px;">
+                  06</span>
+              </td>
+              <td>
+                <a href="https://jpm.com"
+                   style="font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                           color:#1A2940;text-decoration:none;line-height:1.65;
+                           font-weight:500;">JPMorgan AI trading desk achieves 22% alpha outperformance</a>
+              </td>
+            </tr></table>
+          </td>
+        </tr></table>
+          </td>
+        </tr>
+
+          <!-- takeaways -->
+          <tr>
+            <td style="padding:26px 0 4px 0;border-top:1px solid #E5E9F0;">
+              <table width="100%" cellpadding="0" cellspacing="0"><tr>
+                <td style="padding-bottom:14px;">
+                  <span style="display:inline-block;background:#F0FDF4;color:#14532D;font-family:Courier New,Courier,monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid #15803D22;"><span style="color:#15803D;margin-right:5px;">&#9632;</span>KEY TAKEAWAYS</span>
+                  <p style="margin:6px 0 0 0;font-family:Arial,Helvetica,sans-serif;
+                              font-size:10px;color:#94A3B8;letter-spacing:0.3px;">
+                    Three themes to carry into your day</p>
+                </td>
+              </tr></table>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:#F8FAFC;border:1px solid #E5E9F0;
+                              border-left:2px solid #15803D;border-radius:0 3px 3px 0;
+                              padding:16px 20px 6px 20px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      
+        <tr>
+          <td style="padding:0 0 10px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="36" valign="top" style="padding-top:2px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:11px;
+                             font-weight:700;color:#15803D;line-height:1;">01.</span>
+              </td>
+              <td style="padding-left:4px;">
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                            color:#2D3748;line-height:1.8;font-weight:500;">Enterprise AI adoption is mainstream with 55% of Fortune 500 companies now deploying solutions. The competitive advantage shifts from IF to HOW WELL you implement.</p>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 10px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="36" valign="top" style="padding-top:2px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:11px;
+                             font-weight:700;color:#15803D;line-height:1;">02.</span>
+              </td>
+              <td style="padding-left:4px;">
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                            color:#2D3748;line-height:1.8;font-weight:500;">Regulatory frameworks are becoming concrete with EU enforcement and US legislation. Organizations must prioritize compliance infrastructure alongside technical capabilities.</p>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 10px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="36" valign="top" style="padding-top:2px;">
+                <span style="font-family:Courier New,Courier,monospace;font-size:11px;
+                             font-weight:700;color:#15803D;line-height:1;">03.</span>
+              </td>
+              <td style="padding-left:4px;">
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;
+                            color:#2D3748;line-height:1.8;font-weight:500;">The talent gap remains critical - AI expertise supply cannot meet enterprise demand. Internal upskilling and external partnerships are essential for scaling AI initiatives.</p>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════
+         FOOTER
+    ═══════════════════════════════ -->
+    <tr>
+      <td style="background:#0D1B2E;padding:0;border-radius:0 0 4px 4px;">
+
+        <!-- bottom colour rule -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="4" style="background:#2563EB;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#16A34A;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#9333EA;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#EA580C;height:2px;font-size:1px;">&nbsp;</td>
+            <td width="4" style="background:#E11D48;height:2px;font-size:1px;">&nbsp;</td>
+            <td style="background:#0284C7;height:2px;font-size:1px;">&nbsp;</td>
+          </tr>
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding:18px 32px;" valign="middle">
+              <div style="background:rgba(255,255,255,0.08);border-radius:4px;
+                           padding:6px 10px;display:inline-block;margin-bottom:4px;"></div>
+              <p style="margin:4px 0 0 0;font-family:Courier New,Courier,monospace;
+                          font-size:8px;color:#e4e8ee;letter-spacing:1px;">
+                DIGITAL TRANSFORMATION TEAM</p>
+            </td>
+            <td style="padding:18px 32px;" valign="middle" align="right">
+              <p style="margin:0 0 3px 0;font-family:Arial,Helvetica,sans-serif;
+                          font-size:10px;color:#64748B;line-height:1.5;">
+                Designed by
+                <span style="color:#94A3B8;font-weight:600;">Srikar Viswanadham</span></p>
+              
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+    <tr><td style="height:24px;">&nbsp;</td></tr>
+
+  </table>
+  </td></tr>
+</table>
+
+</body>
+</html>

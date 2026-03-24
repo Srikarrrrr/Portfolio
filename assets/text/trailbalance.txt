@@ -1,0 +1,11 @@
+Trail Balance Automation Notes
+
+Replace this content with your actual project write-up.
+
+Web version:
+- Explain user flow and key screens.
+- Mention what manual steps were reduced.
+
+A360 bot version:
+- Explain trigger, automation steps, and output.
+- Mention impact and time saved.
