@@ -223,6 +223,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 #imgbox img{max-width:90vw;max-height:88vh;border-radius:1rem;border:1px solid rgba(0,255,255,.22);box-shadow:0 0 60px rgba(0,255,255,.18);object-fit:contain}
 #iclose{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.3);color:var(--c);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .2s;font-family:'Syne',sans-serif;font-weight:800}
 #iclose:hover{background:rgba(0,255,255,.22)}
+
 </style>
 </head>
 <body>
@@ -551,27 +552,12 @@ window.addEventListener('mousemove',function(e){
 window.addEventListener('mouseover',function(){targetOpacity=.72;});
 window.addEventListener('mouseout',function(){targetOpacity=0;});
 (function bgRaf(){
-  var parLerp=.08;
-  rx+=(mx-rx)*parLerp;ry+=(my-ry)*parLerp;
   if(hasFinePointer&&cdot&&cring){
     dotX+=(mx-dotX)*0.35;dotY+=(my-dotY)*0.35;
     ringX+=(mx-ringX)*0.12;ringY+=(my-ringY)*0.12;
     cdot.style.transform='translate3d('+dotX.toFixed(2)+'px,'+dotY.toFixed(2)+'px,0) translate(-50%,-50%)';
     cring.style.transform='translate3d('+ringX.toFixed(2)+'px,'+ringY.toFixed(2)+'px,0) translate(-50%,-50%)';
     cring.style.opacity=(parseFloat(cring.style.opacity||'0.72')+(targetOpacity-parseFloat(cring.style.opacity||'0.72'))*.2).toFixed(3);
-  }
-  cx+=(tx-cx)*parLerp;cy+=(ty-cy)*parLerp;
-  document.documentElement.style.setProperty('--mx',(cx*100).toFixed(2)+'%');
-  document.documentElement.style.setProperty('--my',(cy*100).toFixed(2)+'%');
-  var g=document.getElementById('hgrid');
-  if(g)g.style.transform='translate('+((cx-.5)*22).toFixed(1)+'px,'+((cy-.5)*22).toFixed(1)+'px)';
-  var p=document.getElementById('bg-parallax');
-  if(p){
-    var dx=(cx-.5),dy=(cy-.5);
-    var l1=p.querySelector('.l1'),l2=p.querySelector('.l2'),l3=p.querySelector('.l3');
-    if(l1)l1.style.transform='translate('+ (dx*22).toFixed(1) +'px,'+ (dy*18).toFixed(1) +'px)';
-    if(l2)l2.style.transform='translate('+ (-dx*28).toFixed(1) +'px,'+ (-dy*20).toFixed(1) +'px)';
-    if(l3)l3.style.transform='translate('+ (dx*14).toFixed(1) +'px,'+ (-dy*12).toFixed(1) +'px)';
   }
   requestAnimationFrame(bgRaf);
 })();
@@ -678,7 +664,7 @@ var AGENT_SS2  = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAGkCAIAAABc
 /* DESCRIPTIONS */
 var TB_DESC    = "<span class=\"t-line t-dim\">TB ANALYSER \u2014 Project Overview</span>\n<br>\n<br>\n<span class=\"t-section\">// WHAT IS IT?</span>\n<br>\n<span class=\"t-line t-dim\">TB Analyser is a machine learning system designed to detect</span>\n<span class=\"t-line t-dim\">tuberculosis from chest X-ray images using deep learning.</span>\n<span class=\"t-line t-dim\">The system provides real-time classification with confidence</span>\n<span class=\"t-line t-dim\">scoring and Grad-CAM heatmap visualisation for clinical use.</span>\n<br>\n<span class=\"t-section\">// HOW IT WORKS?</span>\n<br>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">X-ray image is uploaded via the web interface</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Image preprocessed: resized to 224x224, normalised 0-1</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Passed through a fine-tuned EfficientNetB0 CNN</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Output: TB Positive / Negative + confidence score</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Grad-CAM overlay highlights suspicious regions</span></span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<br>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Python 3.10 + TensorFlow 2.12</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">FastAPI for REST inference endpoint</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">React frontend with real-time results</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">OpenCV for image preprocessing</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Scikit-learn for evaluation metrics</span></span>\n<br>\n<span class=\"t-section\">// RESULTS</span>\n<br>\n<span class=\"t-line\"><span class=\"t-warn\">Test Accuracy:</span>   94.2%</span>\n<span class=\"t-line\"><span class=\"t-warn\">Sensitivity:</span>     91.8%</span>\n<span class=\"t-line\"><span class=\"t-warn\">Specificity:</span>     96.1%</span>\n<span class=\"t-section\">// AUC-ROC:         0.97</span>\n<br>\n<span class=\"t-line t-dim\">Replace this file with your own description.txt</span>\n<br>";
 var CASH_DESC  = "<span class=\"t-section\">// CASH APP \u2014 OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Full-stack financial management application</span>\n<span class=\"t-line t-dim\">  with real-time transaction tracking and audit trail.</span>\n<br>\n<span class=\"t-section\">// REPLACE THIS SECTION</span>\n<span class=\"t-line t-dim\">  Paste your Cash App description.txt content here.</span>\n<br>\n<span class=\"t-section\">// FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> Real-time transaction processing</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> JWT authentication + refresh tokens</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> PostgreSQL with indexed queries</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> Role-based access control</span>\n<br>\n<span class=\"t-section\">// METRICS</span>\n<span class=\"t-line t-warn\">API Response:  &lt;50ms average</span>\n<span class=\"t-line t-warn\">DB Query:      &lt;10ms p95</span>\n<span class=\"t-line t-warn\">Uptime:        99.9%</span>";
-var PBI_DESC   = "<span class=\"t-section\">// POWER BI AUTOMATION - OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Email-to-dashboard automation that ingests daily files,</span>\n<span class=\"t-line t-dim\">  stores them in a shared folder, and refreshes Power BI on schedule.</span>\n<br>\n<span class=\"t-section\">// AUTOMATION FLOW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Outlook receives the daily data file</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Power Automate detects attachment and saves it to OneDrive/SharePoint</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Power BI dataset reads from the shared folder</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Scheduled refresh runs daily at 10:00 AM</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Dashboards update without manual intervention</span>\n<br>\n<span class=\"t-section\">// KEY FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automated email attachment collection</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automatic file download and centralized storage</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Daily scheduled dataset refresh and report update</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Near real-time reporting with zero manual handling</span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Microsoft Power BI, Power Automate, Outlook</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> OneDrive/SharePoint shared folder storage</span>\n<br>\n<span class=\"t-section\">// IMPACT</span>\n<span class=\"t-line t-warn\">Manual handling eliminated: daily file intake + refresh fully automated</span>\n<span class=\"t-line t-warn\">Operational cadence: consistent 10:00 AM dashboard availability</span>\n<br>\n<span class=\"t-section\">// ONGOING AUTOMATION INITIATIVES</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Trial Balance Automation - SAP extraction bots (Automation Anywhere)</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Cash Application Automation - A360 bots for payment advice and line items</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Finance Assurance Automation - audit workflow R&D based on Big 4 platforms</span>";
+var PBI_DESC   = "<span class=\"t-section\">// POWER BI AUTOMATION - OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Email-to-dashboard automation that ingests daily files,</span>\n<span class=\"t-line t-dim\">  stores them in a shared folder, and refreshes Power BI on schedule.</span>\n<br>\n<span class=\"t-section\">// AUTOMATION FLOW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Outlook receives the daily data file</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Power Automate detects attachment and saves it to OneDrive/SharePoint</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Power BI dataset reads from the shared folder</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Scheduled refresh runs daily at 10:00 AM</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Dashboards update without manual intervention</span>\n<br>\n<span class=\"t-section\">// KEY FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automated email attachment collection</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automatic file download and centralized storage</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Daily scheduled dataset refresh and report update</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Near real-time reporting with zero manual handling</span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Microsoft Power BI, Power Automate, Outlook</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> OneDrive/SharePoint shared folder storage</span>\n<br>\n<span class=\"t-section\">// IMPACT</span>\n<span class=\"t-line t-warn\">Manual handling eliminated: daily file intake + refresh fully automated</span>\n<span class=\"t-line t-warn\">Operational cadence: consistent 10:00 AM dashboard availability</span>\n<br>\n<span class=\"t-section\">// ONGOING AUTOMATION INITIATIVES</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Trial Balance Automation - SAP extraction bots (Automation Anywhere)</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Cash Application Automation - A360 bots for payment advice and line items</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Finance Assurance Automation - refining our own assurance workflow, identifying technical feasibility, and developing automations</span>";
 var AGENT_DESC = "<span class=\"t-section\">// AI RESEARCH AGENT \u2014 OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Autonomous AI agent that researches, summarises,</span>\n<span class=\"t-line t-dim\">  and reports \u2014 fully automated via cron scheduling.</span>\n<br>\n<span class=\"t-section\">// REPLACE THIS SECTION</span>\n<span class=\"t-line t-dim\">  Paste your AI Agent description.txt content here.</span>\n<span class=\"t-line t-dim\">  Replace placeholder text with your actual write-up.</span>\n<br>\n<span class=\"t-section\">// HOW IT WORKS</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Cron job triggers agent at scheduled time</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Tavily API searches the web for context</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Groq LLM (Llama3-70B) processes + reasons</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Agent produces structured output / report</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Result saved or distributed automatically</span>\n<br>\n<span class=\"t-section\">// KEY METRICS</span>\n<span class=\"t-line t-warn\">Inference Speed:  ~200ms (Groq)</span>\n<span class=\"t-line t-warn\">Search Results:   Top 5 per query (Tavily)</span>\n<span class=\"t-line t-warn\">Schedule:         Daily automated runs</span>";
 
 /* ═══════════════════════════════════════════════════════
@@ -864,8 +850,8 @@ var projects = [
   {
     id:'assurance', title:'FINANCE ASSURANCE AUTOMATION', tag:'AUDIT ANALYTICS ? PROCESS DESIGN', accent:'#00e5a0',
     preview:null,
-    desc:'Research-led finance assurance automation initiative focused on audit workflow design and data-driven checks inspired by Big 4 platforms.',
-    pills:['AUDIT WORKFLOWS','ASSURANCE ANALYTICS','R&D','PROCESS AUTOMATION','BIG 4 INSPIRED'],
+    desc:'Research-led finance assurance automation initiative focused on refining our own assurance workflow, identifying technical feasibility, and developing data-driven automations.',
+    pills:['AUDIT WORKFLOWS','ASSURANCE ANALYTICS','R&D','PROCESS AUTOMATION','TECHNICAL FEASIBILITY'],
     assets:['DOCS'],
     buildPanel:function(inner){
       var db=document.createElement('div');db.className='pblock';
@@ -1088,29 +1074,50 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
   var ctx=canvas.getContext('2d');
   var dots=[];
   var pointer={x:null,y:null,active:false};
-  var linkDist=140;
-  var pointerDist=170;
+  var linkDist=142;
+  var pointerDist=240;
+  var dpr=1;
+  var vw=window.innerWidth;
+  var vh=window.innerHeight;
   
   function resizeCanvas(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
+    vw=window.innerWidth;
+    vh=window.innerHeight;
+    dpr=window.devicePixelRatio||1;
+    canvas.width=Math.floor(vw*dpr);
+    canvas.height=Math.floor(vh*dpr);
+    canvas.style.width=vw+'px';
+    canvas.style.height=vh+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   function rand(min,max){return Math.random()*(max-min)+min;}
   function initDots(){
     dots=[];
-    var w=canvas.width;
-    var h=canvas.height;
-    var count=Math.floor((w*h)/16000);
-    var dotCount=Math.max(70,Math.min(140,count));
+    var w=vw;
+    var h=vh;
+    var count=Math.floor((w*h)/23000);
+    var dotCount=Math.max(48,Math.min(84,count));
+    var cols=Math.max(6,Math.round(Math.sqrt(dotCount*(w/Math.max(h,1)))));
+    var rows=Math.max(4,Math.ceil(dotCount/cols));
+    var cellW=w/cols;
+    var cellH=h/rows;
     for(var i=0;i<dotCount;i++){
-      dots.push({x:rand(0,w),y:rand(0,h),vx:rand(-0.35,0.35),vy:rand(-0.35,0.35),r:rand(1,2.4)});
+      var col=i%cols;
+      var row=Math.floor(i/cols);
+      dots.push({
+        x:(col+.5)*cellW+rand(-cellW*.22,cellW*.22),
+        y:(row+.5)*cellH+rand(-cellH*.22,cellH*.22),
+        vx:rand(-0.12,0.12),
+        vy:rand(-0.12,0.12),
+        r:rand(.8,1.5)
+      });
     }
   }
   function draw(){
-    var w=canvas.width;
-    var h=canvas.height;
+    var w=vw;
+    var h=vh;
     ctx.clearRect(0,0,w,h);
-    ctx.fillStyle='rgba(0,255,255,.22)';
+    ctx.fillStyle='rgba(0,255,255,.24)';
     for(var i=0;i<dots.length;i++){
       var d=dots[i];
       d.x+=d.vx; d.y+=d.vy;
@@ -1125,8 +1132,8 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
         var dist=Math.sqrt(dx*dx+dy*dy);
         if(dist<linkDist){
           var alpha=1-(dist/linkDist);
-          ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.16)+')';
-          ctx.lineWidth=1;
+          ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.11)+')';
+          ctx.lineWidth=.95;
           ctx.beginPath();
           ctx.moveTo(dots[a].x,dots[a].y);
           ctx.lineTo(dots[b].x,dots[b].y);
@@ -1142,7 +1149,7 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
         if(pd<pointerDist){
           var pa=1-(pd/pointerDist);
           ctx.strokeStyle='rgba(240,165,0,'+(pa*0.22)+')';
-          ctx.lineWidth=1;
+          ctx.lineWidth=1.25;
           ctx.beginPath();
           ctx.moveTo(dots[k].x,dots[k].y);
           ctx.lineTo(pointer.x,pointer.y);

@@ -65,12 +65,14 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .project-showcase.is-hero .results-highlight{background:linear-gradient(90deg,rgba(240,165,0,.1),rgba(240,165,0,.05));border-left-color:var(--o)}
 #cdot{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--c);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 10px var(--c);mix-blend-mode:screen;will-change:transform,opacity}
 #cring{position:fixed;top:0;left:0;width:32px;height:32px;border:2px solid rgba(0,255,255,.7);border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:screen;will-change:transform,opacity;opacity:.72}
+.dot-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.8}
 @media(max-width:1100px){.projects-grid{grid-template-columns:1fr}.project-showcase{min-height:unset}}
 @media(hover:hover) and (pointer:fine){*,*::before,*::after{cursor:none!important}}
 @media(hover:none),(pointer:coarse){body{cursor:auto}#cdot,#cring{display:none}}
 </style>
 </head>
 <body>
+<canvas id="dot-canvas" class="dot-canvas" aria-hidden="true"></canvas>
 <div class="header">
   <div class="wrap">
     <h1>PORTFOLIO PROJECTS</h1>
@@ -354,6 +356,121 @@ document.addEventListener('mouseup',function(){targetDotS=1;targetRingS=1;target
   cring.style.opacity=(parseFloat(cring.style.opacity||'0.72')+(targetOpacity-parseFloat(cring.style.opacity||'0.72'))*.2).toFixed(3);
   requestAnimationFrame(raf);
 })();
+})();
+
+// SUBTLE STRING NETWORK
+(function(){
+'use strict';
+var canvas=document.getElementById('dot-canvas');
+if(!canvas)return;
+var ctx=canvas.getContext('2d');
+var dots=[];
+var pointer={x:null,y:null,active:false};
+var linkDist=142;
+var pointerDist=240;
+var dpr=1;
+var vw=window.innerWidth;
+var vh=window.innerHeight;
+
+function resizeCanvas(){
+  vw=window.innerWidth;
+  vh=window.innerHeight;
+  dpr=window.devicePixelRatio||1;
+  canvas.width=Math.floor(vw*dpr);
+  canvas.height=Math.floor(vh*dpr);
+  canvas.style.width=vw+'px';
+  canvas.style.height=vh+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+function rand(min,max){return Math.random()*(max-min)+min;}
+function initDots(){
+  dots=[];
+  var w=vw;
+  var h=vh;
+  var count=Math.floor((w*h)/23000);
+  var dotCount=Math.max(48,Math.min(84,count));
+  var cols=Math.max(6,Math.round(Math.sqrt(dotCount*(w/Math.max(h,1)))));
+  var rows=Math.max(4,Math.ceil(dotCount/cols));
+  var cellW=w/cols;
+  var cellH=h/rows;
+  for(var i=0;i<dotCount;i++){
+    var col=i%cols;
+    var row=Math.floor(i/cols);
+    dots.push({
+      x:(col+.5)*cellW+rand(-cellW*.22,cellW*.22),
+      y:(row+.5)*cellH+rand(-cellH*.22,cellH*.22),
+      vx:rand(-0.12,0.12),
+      vy:rand(-0.12,0.12),
+      r:rand(.8,1.5)
+    });
+  }
+}
+function draw(){
+  var w=vw;
+  var h=vh;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle='rgba(0,255,255,.24)';
+  for(var i=0;i<dots.length;i++){
+    var d=dots[i];
+    d.x+=d.vx; d.y+=d.vy;
+    if(d.x<0||d.x>w)d.vx*=-1;
+    if(d.y<0||d.y>h)d.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fill();
+  }
+  for(var a=0;a<dots.length;a++){
+    for(var b=a+1;b<dots.length;b++){
+      var dx=dots[a].x-dots[b].x;
+      var dy=dots[a].y-dots[b].y;
+      var dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<linkDist){
+        var alpha=1-(dist/linkDist);
+        ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.11)+')';
+        ctx.lineWidth=.95;
+        ctx.beginPath();
+        ctx.moveTo(dots[a].x,dots[a].y);
+        ctx.lineTo(dots[b].x,dots[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+  if(pointer.active){
+    for(var k=0;k<dots.length;k++){
+      var px=dots[k].x-pointer.x;
+      var py=dots[k].y-pointer.y;
+      var pd=Math.sqrt(px*px+py*py);
+      if(pd<pointerDist){
+        var pa=1-(pd/pointerDist);
+        ctx.strokeStyle='rgba(240,165,0,'+(pa*0.22)+')';
+        ctx.lineWidth=1.25;
+        ctx.beginPath();
+        ctx.moveTo(dots[k].x,dots[k].y);
+        ctx.lineTo(pointer.x,pointer.y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+function onMove(e){
+  var rect=canvas.getBoundingClientRect();
+  pointer.x=e.clientX-rect.left;
+  pointer.y=e.clientY-rect.top;
+  pointer.active=true;
+}
+function onLeave(){pointer.active=false;}
+
+window.addEventListener('resize',function(){resizeCanvas();initDots();});
+window.addEventListener('mousemove',onMove);
+window.addEventListener('mouseout',onLeave);
+window.addEventListener('touchmove',function(e){
+  if(e.touches&&e.touches[0])onMove(e.touches[0]);
+},{passive:true});
+window.addEventListener('touchend',onLeave);
+resizeCanvas();
+initDots();
+draw();
 })();
 </script>
 </body>

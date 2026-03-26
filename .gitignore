@@ -6,3 +6,5 @@ tmp_*.txt
 tmp_*.js
 
 portfolio.zip
+
+.vercel

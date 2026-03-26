@@ -17,7 +17,7 @@ body::before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:-1
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.45}
 @keyframes spin{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.06)}to{transform:rotate(360deg) scale(1)}}
 
-.dot-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.75}
+.dot-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.82}
 
 .wrap{max-width:1300px;margin:0 auto;padding:0 1.8rem}
 .header{position:relative;z-index:2;padding:1.5rem 0;border-bottom:1px solid rgba(0,255,255,.08);display:flex;justify-content:space-between;align-items:center}
@@ -131,63 +131,63 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 var projectData={
   tb:{
     title:'TB ANALYSER',
-    subtitle:'VERSION 1 - PRODUCTION (A360)',
-    tag:'AUTOMATION ANYWHERE - SAP - FINANCE OPS',
+    subtitle:'VERSION 1 - TRIAL BALANCE WEB APP',
+    tag:'STREAMLIT - PYTHON - FINANCIAL ANALYTICS',
     accent:'#00FFFF',
-    desc:'Production Automation Anywhere 360 SAP bot framework for Trial Balance extraction across multiple profit centers. Bots log into SAP, extract TB data, and deliver structured outputs for month-end reporting.',
+    desc:'Full-stack financial analytics web app for finance teams to upload, process, and analyze multi-period Trial Balance data across GL accounts.',
     overview:[
-      {label:'Bots Deployed',value:'6 bots: GAL, PMSS, Goa Cargo, Goa Car Parking, Hyderabad Retail, Hyderabad Car Parking'},
-      {label:'Automation Flow',value:'SAP login -> TB extraction -> structured output -> email to business team'},
-      {label:'Impact',value:'Eliminates manual SAP extraction and standardizes TB retrieval'},
-      {label:'Future Scope',value:'Extend to all company codes and integrate with TB Analyser dashboard'}
+      {label:'Type',value:'Web application - financial analytics dashboard'},
+      {label:'Users',value:'Finance / Accounting teams'},
+      {label:'Data Source',value:'Multiple XLSX Trial Balance files (monthly exports from ERP/SAP)'},
+      {label:'Scope',value:'April-November fiscal period analysis across GL accounts'},
+      {label:'Output',value:'Interactive charts, filtered GL tables, heatmap variance sheet'}
     ],
     features:[
-      {icon:'-',text:'Automated SAP login and TB data extraction across multiple profit centers'},
-      {icon:'-',text:'Scheduled bot execution for consistent month-end readiness'},
-      {icon:'-',text:'Standardized output structure for faster downstream analysis'},
-      {icon:'-',text:'Reduced manual effort and improved reporting turnaround'}
+      {icon:'-',text:'Multi-file Excel uploader with drag-and-drop and paginated file manager'},
+      {icon:'-',text:'GL ID tag filter to focus all views on selected accounts'},
+      {icon:'-',text:'Filtered GL table with month-wise balances and FTM cumulative columns'},
+      {icon:'-',text:'KPI variance card with account selector and percentage change indicator'},
+      {icon:'-',text:'Accumulated balance line chart across April to November'},
+      {icon:'-',text:'Month-to-month change bar chart with positive/negative coding'},
+      {icon:'-',text:'Heatmap grid with variance and change % for anomaly spotting'}
     ],
-    techStack:['Automation Anywhere 360','SAP','Excel (XLSX)'],
+    techStack:['Python','Streamlit','Pandas','Plotly / Altair','openpyxl / xlrd','Excel (XLSX/XLS)'],
     tools:[],
     impact:[
-      'Eliminates manual SAP extraction effort.',
-      'Speeds up month-end reporting cycles.',
-      'Creates a scalable foundation for full TB automation.'
+      'Reduces manual GL analysis from hours to minutes.',
+      'Handles multiple company-code TB files in one workflow.',
+      'Enables non-technical users to explore GL trends without SQL.'
     ],
     images:[
-      {src:'assets/trailbalance/a360/TB Analysis_BOT_Actions.mp4',label:'A360 Bot Actions (Video)',type:'video'}
+      {src:'assets/trailbalance/web/TB Analyzer - 1.png',label:'Dashboard Main View'},
+      {src:'assets/trailbalance/web/TB Analyzer - 2.png',label:'GL Filter Interface'},
+      {src:'assets/trailbalance/web/TB Analyzer - 3.png',label:'Balance Tracking'},
+      {src:'assets/trailbalance/web/TB Analyzer - 4.png',label:'Variance Metrics'}
     ],
     version2:{
-      title:'VERSION 2 - TRIAL BALANCE WEB APP',
-      desc:'Full-stack financial analytics web app for finance teams to upload, process, and analyze multi-period Trial Balance data across GL accounts.',
+      title:'TB ANALYSER',
+      subtitle:'VERSION 2 - PRODUCTION (A360)',
+      tag:'AUTOMATION ANYWHERE - SAP - FINANCE OPS',
+      desc:'Production Automation Anywhere 360 SAP bot framework for Trial Balance extraction across multiple profit centers. Bots log into SAP, extract TB data, and deliver structured outputs for month-end reporting.',
       overview:[
-        {label:'Type',value:'Web application - financial analytics dashboard'},
-        {label:'Users',value:'Finance / Accounting teams'},
-        {label:'Data Source',value:'Multiple XLSX Trial Balance files (monthly exports from ERP/SAP)'},
-        {label:'Scope',value:'April-November fiscal period analysis across GL accounts'},
-        {label:'Output',value:'Interactive charts, filtered GL tables, heatmap variance sheet'}
+        {label:'Bots Deployed',value:'6 bots: GAL, PMSS, Goa Cargo, Goa Car Parking, Hyderabad Retail, Hyderabad Car Parking'},
+        {label:'Automation Flow',value:'SAP login -> TB extraction -> structured output -> email to business team'},
+        {label:'Impact',value:'Eliminates manual SAP extraction and standardizes TB retrieval'},
+        {label:'Future Scope',value:'Extend to all company codes and integrate with TB Analyser dashboard'}
       ],
       features:[
-        {icon:'-',text:'Multi-file Excel uploader with drag-and-drop and paginated file manager'},
-        {icon:'-',text:'GL ID tag filter to focus all views on selected accounts'},
-        {icon:'-',text:'Filtered GL table with month-wise balances and FTM cumulative columns'},
-        {icon:'-',text:'KPI variance card with account selector and percentage change indicator'},
-        {icon:'-',text:'Accumulated balance line chart across April to November'},
-        {icon:'-',text:'Month-to-month change bar chart with positive/negative coding'},
-        {icon:'-',text:'Heatmap grid with variance and change % for anomaly spotting'}
+        {icon:'-',text:'Automated SAP login and TB data extraction across multiple profit centers'},
+        {icon:'-',text:'Scheduled bot execution for consistent month-end readiness'},
+        {icon:'-',text:'Standardized output structure for faster downstream analysis'},
+        {icon:'-',text:'Reduced manual effort and improved reporting turnaround'}
       ],
-      techStack:['Python','Streamlit','Pandas','Plotly / Altair','openpyxl / xlrd','Excel (XLSX/XLS)'],
+      techStack:['Automation Anywhere 360','SAP','Excel (XLSX)'],
       impact:[
-        'Reduces manual GL analysis from hours to minutes.',
-        'Handles multiple company-code TB files in one workflow.',
-        'Enables non-technical users to explore GL trends without SQL.'
+        'Eliminates manual SAP extraction effort.',
+        'Speeds up month-end reporting cycles.',
+        'Creates a scalable foundation for full TB automation.'
       ],
-      media:[
-        {src:'assets/trailbalance/web/TB Analyzer - 1.png',label:'Dashboard Main View'},
-        {src:'assets/trailbalance/web/TB Analyzer - 2.png',label:'GL Filter Interface'},
-        {src:'assets/trailbalance/web/TB Analyzer - 3.png',label:'Balance Tracking'},
-        {src:'assets/trailbalance/web/TB Analyzer - 4.png',label:'Variance Metrics'}
-      ]
+      media:[]
     }
   },
   cash:{
@@ -285,26 +285,26 @@ var projectData={
     subtitle:'AUDIT WORKFLOW R&D',
     tag:'AUDIT ANALYTICS - PROCESS AUTOMATION',
     accent:'#00e5a0',
-    desc:'Research-driven automation initiative inspired by Big 4 audit platforms. Focused on mapping assurance workflows, identifying automation opportunities, and designing data-driven checks for scalable, intelligent audit operations.',
+    desc:'Research-driven finance assurance initiative focused on refining our own assurance workflow, identifying technical feasibility, and developing scalable automation opportunities for audit and control processes.',
     overview:[
       {label:'Status',value:'Research and design (R&D phase)'},
-      {label:'Inspiration',value:'Deloitte Omnia and KPMG Clara'},
-      {label:'Focus',value:'Audit workflow automation and assurance analytics'},
-      {label:'Goal',value:'Scalable, intelligent audit automation framework'}
+      {label:'Focus',value:'Finance assurance workflow refinement and assurance analytics'},
+      {label:'Approach',value:'Technical feasibility identification and process development'},
+      {label:'Goal',value:'Scalable finance assurance automation framework'}
     ],
     features:[
-      {icon:'-',text:'Workflow discovery and mapping of audit steps and handoffs'},
-      {icon:'-',text:'Identification of high-impact assurance checks and test points'},
-      {icon:'-',text:'Design of data-driven assurance analytics and exception testing'},
-      {icon:'-',text:'Blueprint for evidence collection and audit trail standardization'},
-      {icon:'-',text:'Automation roadmap aligned with Big 4 style methodologies'}
+      {icon:'-',text:'Workflow discovery and refinement of finance assurance steps and handoffs'},
+      {icon:'-',text:'Identification of technically feasible assurance checks and automation points'},
+      {icon:'-',text:'Development of data-driven assurance analytics and exception testing logic'},
+      {icon:'-',text:'Blueprint for evidence collection, traceability, and audit trail standardization'},
+      {icon:'-',text:'Progressive development roadmap for internal finance assurance automation'}
     ],
     techStack:[],
     tools:[],
     impact:[
-      'Creates a structured roadmap for automating audit workflows.',
-      'Targets repeatable, data-driven checks to improve assurance quality.',
-      'Sets foundation for scalable, intelligent audit operations.'
+      'Creates a structured roadmap for refining and automating finance assurance workflows.',
+      'Targets technically feasible, repeatable checks to improve assurance quality.',
+      'Sets the foundation for scalable internal finance assurance development.'
     ],
     images:[]
   }
@@ -420,8 +420,9 @@ function renderProject(pid){
   var leftCol=document.createElement('div');
   leftCol.appendChild(featuresDiv);
   
+  var impactDiv=null;
   if(p.impact && p.impact.length){
-    var impactDiv=document.createElement('div');
+    impactDiv=document.createElement('div');
     impactDiv.className='detail-block';
     var iTitle=document.createElement('h2');
     iTitle.className='section-title';
@@ -444,28 +445,29 @@ function renderProject(pid){
       iList.appendChild(item);
     });
     impactDiv.appendChild(iList);
-    leftCol.appendChild(impactDiv);
   }
   
   var rightCol=document.createElement('div');
   
-  var techDiv=document.createElement('div');
-  techDiv.className='detail-block';
-  var tTitle=document.createElement('h2');
-  tTitle.className='section-title';
-  tTitle.textContent='TECHNOLOGY STACK';
-  techDiv.appendChild(tTitle);
-  
-  var tStack=document.createElement('div');
-  tStack.className='tech-stack';
-  p.techStack.forEach(function(t){
-    var badge=document.createElement('div');
-    badge.className='tech-badge';
-    badge.textContent=t;
-    tStack.appendChild(badge);
-  });
-  techDiv.appendChild(tStack);
-  rightCol.appendChild(techDiv);
+  if(p.techStack && p.techStack.length){
+    var techDiv=document.createElement('div');
+    techDiv.className='detail-block';
+    var tTitle=document.createElement('h2');
+    tTitle.className='section-title';
+    tTitle.textContent='TECHNOLOGY STACK';
+    techDiv.appendChild(tTitle);
+    
+    var tStack=document.createElement('div');
+    tStack.className='tech-stack';
+    p.techStack.forEach(function(t){
+      var badge=document.createElement('div');
+      badge.className='tech-badge';
+      badge.textContent=t;
+      tStack.appendChild(badge);
+    });
+    techDiv.appendChild(tStack);
+    rightCol.appendChild(techDiv);
+  }
   
   if(p.tools && p.tools.length){
     var toolsDiv=document.createElement('div');
@@ -485,6 +487,11 @@ function renderProject(pid){
     });
     toolsDiv.appendChild(toolsStack);
     rightCol.appendChild(toolsDiv);
+  }
+
+  if(impactDiv){
+    if(p.techStack && p.techStack.length)leftCol.appendChild(impactDiv);
+    else rightCol.appendChild(impactDiv);
   }
   
   details.appendChild(leftCol);
@@ -550,20 +557,34 @@ function renderProject(pid){
     if(main) main.appendChild(eSection);
   }
   
-  if(p.version2 && p.version2.media && p.version2.media.length){
+  if(p.version2){
+    var v2Header=document.createElement('div');
+    v2Header.className='detail-block';
+
+    if(p.version2.tag){
+      var v2Tag=document.createElement('div');
+      v2Tag.className='hero-tag';
+      v2Tag.textContent=p.version2.tag;
+      v2Header.appendChild(v2Tag);
+    }
+
     var v2Title=document.createElement('h2');
-    v2Title.className='section-title';
-    v2Title.textContent=p.version2.title || 'VERSION 2';
-    v2Section.appendChild(v2Title);
+    v2Title.className='hero-title';
+    v2Title.style.fontSize='clamp(1.6rem,4vw,2.5rem)';
+    v2Title.style.marginBottom='1rem';
+    v2Title.innerHTML=(p.version2.title || p.title)+'<br><span style="font-size:.65em;font-weight:400;color:rgba(200,200,220,.7)">'+(p.version2.subtitle || 'VERSION 2')+'</span>';
+    v2Header.appendChild(v2Title);
     
     if(p.version2.desc){
       var v2Desc=document.createElement('p');
       v2Desc.className='hero-desc';
       v2Desc.style.maxWidth='90ch';
-      v2Desc.style.marginBottom='1.5rem';
+      v2Desc.style.marginBottom='0';
       v2Desc.textContent=p.version2.desc;
-      v2Section.appendChild(v2Desc);
+      v2Header.appendChild(v2Desc);
     }
+    v2Section.appendChild(v2Header);
+
     if(p.version2.overview && p.version2.overview.length){
       var v2Grid=document.createElement('div');
       v2Grid.className='overview-grid';
@@ -590,7 +611,7 @@ function renderProject(pid){
       v2Features.className='detail-block';
       var v2FTitle=document.createElement('h2');
       v2FTitle.className='section-title';
-      v2FTitle.textContent='VERSION 2 FEATURES';
+      v2FTitle.textContent='KEY FEATURES';
       v2Features.appendChild(v2FTitle);
       var v2List=document.createElement('div');
       v2List.className='features-list';
@@ -614,7 +635,7 @@ function renderProject(pid){
       v2Tech.className='detail-block';
       var v2TTitle=document.createElement('h2');
       v2TTitle.className='section-title';
-      v2TTitle.textContent='VERSION 2 TECH STACK';
+      v2TTitle.textContent='TECHNOLOGY STACK';
       v2Tech.appendChild(v2TTitle);
       var v2TGrid=document.createElement('div');
       v2TGrid.className='tech-stack';
@@ -633,7 +654,7 @@ function renderProject(pid){
       v2Impact.className='detail-block';
       var v2ITitle=document.createElement('h2');
       v2ITitle.className='section-title';
-      v2ITitle.textContent='VERSION 2 IMPACT';
+      v2ITitle.textContent='IMPACT';
       v2Impact.appendChild(v2ITitle);
       var v2IList=document.createElement('div');
       v2IList.className='features-list';
@@ -652,31 +673,33 @@ function renderProject(pid){
       v2Section.appendChild(v2Impact);
     }
     
-    var v2Gallery=document.createElement('div');
-    v2Gallery.className='images-gallery';
-    p.version2.media.forEach(function(media){
-      var card=document.createElement('div');
-      card.className='image-card';
-      if(media.type==='video'){
-        var v=document.createElement('video');
-        v.src=media.src;
-        v.controls=true;
-        v.preload='metadata';
-        v.playsInline=true;
-        card.appendChild(v);
-      }else{
-        var im=document.createElement('img');
-        im.src=media.src;
-        im.alt=media.label || '';
-        card.appendChild(im);
-      }
-      var label=document.createElement('div');
-      label.className='image-label';
-      label.textContent=media.label || '';
-      card.appendChild(label);
-      v2Gallery.appendChild(card);
-    });
-    v2Section.appendChild(v2Gallery);
+    if(p.version2.media && p.version2.media.length){
+      var v2Gallery=document.createElement('div');
+      v2Gallery.className='images-gallery';
+      p.version2.media.forEach(function(media){
+        var card=document.createElement('div');
+        card.className='image-card';
+        if(media.type==='video'){
+          var v=document.createElement('video');
+          v.src=media.src;
+          v.controls=true;
+          v.preload='metadata';
+          v.playsInline=true;
+          card.appendChild(v);
+        }else{
+          var im=document.createElement('img');
+          im.src=media.src;
+          im.alt=media.label || '';
+          card.appendChild(im);
+        }
+        var label=document.createElement('div');
+        label.className='image-label';
+        label.textContent=media.label || '';
+        card.appendChild(label);
+        v2Gallery.appendChild(card);
+      });
+      v2Section.appendChild(v2Gallery);
+    }
   }
 }
 
@@ -717,39 +740,54 @@ var canvas=document.getElementById('dot-canvas');
 var ctx=canvas.getContext('2d');
 var dots=[];
 var pointer={x:null,y:null,active:false};
-var dotCount=110;
-var linkDist=140;
-var pointerDist=170;
+var dotCount=72;
+var linkDist=142;
+var pointerDist=240;
+var dpr=1;
+var vw=window.innerWidth;
+var vh=window.innerHeight;
 
 function resizeCanvas(){
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
+  vw=window.innerWidth;
+  vh=window.innerHeight;
+  dpr=window.devicePixelRatio||1;
+  canvas.width=Math.floor(vw*dpr);
+  canvas.height=Math.floor(vh*dpr);
+  canvas.style.width=vw+'px';
+  canvas.style.height=vh+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
 }
 
 function rand(min,max){return Math.random()*(max-min)+min;}
 
 function initDots(){
   dots=[];
-  var w=canvas.width;
-  var h=canvas.height;
-  var count=Math.floor((w*h)/16000);
-  dotCount=Math.max(70,Math.min(140,count));
+  var w=vw;
+  var h=vh;
+  var count=Math.floor((w*h)/23000);
+  dotCount=Math.max(50,Math.min(86,count));
+  var cols=Math.max(6,Math.round(Math.sqrt(dotCount*(w/Math.max(h,1)))));
+  var rows=Math.max(4,Math.ceil(dotCount/cols));
+  var cellW=w/cols;
+  var cellH=h/rows;
   for(var i=0;i<dotCount;i++){
+    var col=i%cols;
+    var row=Math.floor(i/cols);
     dots.push({
-      x:rand(0,w),
-      y:rand(0,h),
-      vx:rand(-0.35,0.35),
-      vy:rand(-0.35,0.35),
-      r:rand(1,2.4)
+      x:(col+.5)*cellW+rand(-cellW*.22,cellW*.22),
+      y:(row+.5)*cellH+rand(-cellH*.22,cellH*.22),
+      vx:rand(-0.12,0.12),
+      vy:rand(-0.12,0.12),
+      r:rand(.8,1.5)
     });
   }
 }
 
 function draw(){
-  var w=canvas.width;
-  var h=canvas.height;
+  var w=vw;
+  var h=vh;
   ctx.clearRect(0,0,w,h);
-  ctx.fillStyle='rgba(0,255,255,.22)';
+  ctx.fillStyle='rgba(0,255,255,.24)';
   for(var i=0;i<dots.length;i++){
     var d=dots[i];
     d.x+=d.vx;
@@ -768,8 +806,8 @@ function draw(){
       var dist=Math.sqrt(dx*dx+dy*dy);
       if(dist<linkDist){
         var alpha=1-(dist/linkDist);
-        ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.16)+')';
-        ctx.lineWidth=1;
+        ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.11)+')';
+        ctx.lineWidth=.95;
         ctx.beginPath();
         ctx.moveTo(dots[a].x,dots[a].y);
         ctx.lineTo(dots[b].x,dots[b].y);
@@ -785,8 +823,8 @@ function draw(){
       var pd=Math.sqrt(px*px+py*py);
       if(pd<pointerDist){
         var pa=1-(pd/pointerDist);
-        ctx.strokeStyle='rgba(240,165,0,'+(pa*0.22)+')';
-        ctx.lineWidth=1;
+          ctx.strokeStyle='rgba(240,165,0,'+(pa*0.22)+')';
+          ctx.lineWidth=1.25;
         ctx.beginPath();
         ctx.moveTo(dots[k].x,dots[k].y);
         ctx.lineTo(pointer.x,pointer.y);
