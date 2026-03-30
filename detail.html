@@ -16,33 +16,47 @@ body{background:#050508;color:#ccd;font-family:'Syne',sans-serif;overflow-x:hidd
 body::before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:-1;background:conic-gradient(from 120deg at 25% 40%,rgba(0,255,255,.08),transparent 40%,rgba(191,0,255,.07),transparent 80%),radial-gradient(circle at 75% 70%,rgba(0,229,160,.08),transparent 42%);filter:blur(18px);animation:spin 28s linear infinite}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.45}
 @keyframes spin{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.06)}to{transform:rotate(360deg) scale(1)}}
+@keyframes riseFade{from{opacity:0;transform:translateY(28px) scale(.985);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes softPulse{0%,100%{box-shadow:0 0 0 rgba(0,255,255,0)}50%{box-shadow:0 0 28px rgba(0,255,255,.12)}}
+@keyframes scanSweep{0%{transform:translateX(-160%) skewX(-18deg);opacity:0}20%{opacity:.42}100%{transform:translateX(280%) skewX(-18deg);opacity:0}}
 
 .dot-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.82}
+.reveal{opacity:0;transform:translateY(26px);filter:blur(8px);transition:opacity .75s ease,transform .75s ease,filter .75s ease}
+.reveal.in{opacity:1;transform:translateY(0);filter:blur(0)}
+.panel-animate{position:relative;overflow:hidden}
+.panel-animate::after{content:"";position:absolute;top:-120%;left:-45%;width:38%;height:320%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.16),transparent);transform:translateX(-180%) skewX(-18deg);pointer-events:none;opacity:0}
+.panel-animate:hover::after,.panel-animate.is-live::after{animation:scanSweep 1.2s ease}
 
 .wrap{max-width:1300px;margin:0 auto;padding:0 1.8rem}
 .header{position:relative;z-index:2;padding:1.5rem 0;border-bottom:1px solid rgba(0,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,255,.6),rgba(191,0,255,.35),transparent)}
 .back-btn{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;color:#00FFFF;text-decoration:none;padding:.55rem .88rem;border:1px solid rgba(0,255,255,.3);border-radius:.5rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer}
 .back-btn:hover{border-color:rgba(191,0,255,.55);box-shadow:0 0 18px rgba(0,255,255,.18);cursor:pointer}
 
 .hero{position:relative;z-index:1;padding:4rem 0 3rem}
+.hero::after{content:"";position:absolute;inset:0;border-radius:1.5rem;background:linear-gradient(135deg,rgba(0,255,255,.07),transparent 42%,rgba(191,0,255,.05));opacity:.55;pointer-events:none}
 .hero-tag{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.12em;color:rgba(0,255,255,.7);text-transform:uppercase;margin-bottom:1rem}
 .hero-title{font-family:'Michroma',monospace;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.08em;color:#f6fbff;margin-bottom:1.5rem;line-height:1.2}
 .hero-desc{font-size:.95rem;line-height:1.8;color:rgba(200,200,220,.75);max-width:90ch;margin-bottom:2rem}
 
 .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2.4rem 0 1rem}
-.info-card{background:rgba(0,255,255,.04);border:1px solid var(--bc);border-radius:.8rem;padding:1.05rem 1.1rem;min-height:110px}
+.info-card{background:rgba(0,255,255,.04);border:1px solid var(--bc);border-radius:.8rem;padding:1.05rem 1.1rem;min-height:110px;transition:transform .32s ease,border-color .32s ease,box-shadow .32s ease}
+.info-card:hover{transform:translateY(-6px);border-color:rgba(0,255,255,.34);box-shadow:0 16px 34px rgba(0,0,0,.2),0 0 24px rgba(0,255,255,.08)}
 .info-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,255,255,.7);margin-bottom:.6rem}
 .info-value{color:rgba(230,235,255,.88);font-size:.9rem;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 
 .feature-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;margin:4rem 0;align-items:start}
+.feature-grid.stacked-layout{grid-template-columns:1fr;gap:2rem}
 .feature-grid > div{min-width:0}
-.section-title{font-family:'Michroma',monospace;font-size:1.5rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--accent);color:var(--accent)}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.section-title{position:relative;font-family:'Michroma',monospace;font-size:1.5rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--accent);color:var(--accent)}
+.section-title::after{content:"";position:absolute;left:0;bottom:-2px;width:140px;height:2px;background:linear-gradient(90deg,var(--accent),transparent);box-shadow:0 0 18px var(--accent)}
 
 .features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
-.detail-block{margin-bottom:2.2rem}
+.detail-block{margin-bottom:2.2rem;padding:1.2rem;border:1px solid rgba(120,225,255,.12);border-radius:1rem;background:linear-gradient(180deg,rgba(8,10,18,.78),rgba(8,10,18,.45));box-shadow:0 12px 30px rgba(0,0,0,.2)}
 .detail-block:last-child{margin-bottom:0}
 .feature-item{display:flex;gap:1rem;align-items:flex-start;padding:1rem;border-left:3px solid var(--accent);background:rgba(0,255,255,.04);border-radius:.5rem;transition:all .3s;cursor:default}
-.feature-item:hover{background:rgba(0,255,255,.08);transform:translateX(8px)}
+.feature-item:hover{background:rgba(0,255,255,.08);transform:translateX(8px);box-shadow:0 10px 22px rgba(0,0,0,.18)}
 .feature-icon{font-size:1.2rem;color:var(--accent);flex-shrink:0;margin-top:.2rem}
 .feature-text{color:rgba(200,200,220,.8);font-size:.9rem;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 
@@ -50,7 +64,16 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .tech-badge{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.06em;padding:.6rem 1rem;border:1px solid var(--accent);border-radius:.5rem;background:rgba(0,255,255,.06);color:var(--accent);text-transform:uppercase;transition:all .2s;line-height:1.3;text-align:center;white-space:normal;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .tech-badge:hover{background:rgba(0,255,255,.15);box-shadow:0 0 12px var(--accent)33;cursor:default}
 
-.images-section{margin:4rem 0;padding:2.5rem 0;border-top:1px solid rgba(0,255,255,.08);border-bottom:1px solid rgba(0,255,255,.08)}
+.architecture-section{margin:4rem 0;padding:2.2rem 0;border-top:1px solid rgba(0,255,255,.08);border-bottom:1px solid rgba(0,255,255,.08)}
+.architecture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:1.8rem}
+.architecture-card{position:relative;padding:1.2rem 1.1rem 1.1rem;border:1px solid rgba(120,225,255,.16);border-radius:1rem;background:linear-gradient(180deg,rgba(8,10,18,.9),rgba(8,10,18,.55));box-shadow:0 14px 30px rgba(0,0,0,.18);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.architecture-card:hover{transform:translateY(-6px);border-color:rgba(0,255,255,.34);box-shadow:0 18px 34px rgba(0,0,0,.24),0 0 24px rgba(0,255,255,.08)}
+.architecture-step{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
+.architecture-title{font-family:'Michroma',monospace;font-size:.95rem;letter-spacing:.06em;color:#f6fbff;line-height:1.45;margin-bottom:.8rem}
+.architecture-text{color:rgba(200,200,220,.8);font-size:.88rem;line-height:1.75}
+
+.images-section{position:relative;margin:4rem 0;padding:2.5rem 0;border-top:1px solid rgba(0,255,255,.08);border-bottom:1px solid rgba(0,255,255,.08)}
+.images-section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,255,.52),rgba(191,0,255,.25),transparent)}
 .images-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
 .image-card{border-radius:1rem;overflow:hidden;border:1px solid rgba(130,225,255,.2);transition:all .3s;cursor:pointer;user-select:none}
 .image-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,255,255,.12),0 0 20px var(--accent)18}
@@ -62,6 +85,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .image-label{padding:.8rem;background:rgba(9,12,22,.8);color:rgba(200,200,220,.8);font-size:.8rem;letter-spacing:.04em}
 
 .nav-footer{position:relative;z-index:2;padding:2rem 0;border-top:1px solid rgba(0,255,255,.08);display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.nav-footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,255,.42),transparent)}
 
 /* CURSOR */
 #cdot{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--c);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 10px var(--c);mix-blend-mode:screen;will-change:transform,opacity}
@@ -84,6 +108,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin:4rem 0;align-items:start}
 @media(max-width:900px){
   .feature-grid{grid-template-columns:1fr;gap:2.2rem}
+  .split-grid{grid-template-columns:1fr}
   .content-grid{grid-template-columns:1fr}
 }
 
@@ -111,6 +136,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
   <section class="overview-grid" id="overview-section"></section>
   
   <section class="feature-grid" id="details-section"></section>
+  <section id="architecture-section"></section>
   
   <section class="images-section" id="images-section"></section>
   <section class="images-section" id="version2-section"></section>
@@ -128,16 +154,46 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 (function(){
 'use strict';
 
+function queueReveal(scope){
+  var root=scope||document;
+  root.querySelectorAll('.header,.hero,.overview-grid,.info-card,.detail-block,.images-section,.image-card,.nav-footer,.back-btn').forEach(function(node){
+    node.classList.add('reveal');
+  });
+  root.querySelectorAll('.hero,.info-card,.detail-block,.image-card,.back-btn').forEach(function(node){
+    node.classList.add('panel-animate');
+  });
+}
+
+var revealObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      if(entry.target.classList.contains('panel-animate'))entry.target.classList.add('is-live');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
+
+function bindReveals(scope){
+  var root=scope||document;
+  root.querySelectorAll('.reveal').forEach(function(node){
+    if(!node.dataset.revealBound){
+      node.dataset.revealBound='1';
+      revealObserver.observe(node);
+    }
+  });
+}
+
 var projectData={
   tb:{
     title:'TB ANALYSER',
     subtitle:'VERSION 1 - TRIAL BALANCE WEB APP',
     tag:'STREAMLIT - PYTHON - FINANCIAL ANALYTICS',
     accent:'#00FFFF',
-    desc:'Full-stack financial analytics web app for finance teams to upload, process, and analyze multi-period Trial Balance data across GL accounts.',
+    desc:'Financial analytics web app for finance teams to clean and consolidate multi-period Trial Balance data, calculate month-on-month variance, measure percentage change against the previous month, and highlight percentage movements based on business requirements.',
     overview:[
       {label:'Type',value:'Web application - financial analytics dashboard'},
-      {label:'Users',value:'Finance / Accounting teams'},
+      {label:'Users',value:'R2R team'},
       {label:'Data Source',value:'Multiple XLSX Trial Balance files (monthly exports from ERP/SAP)'},
       {label:'Scope',value:'April-November fiscal period analysis across GL accounts'},
       {label:'Output',value:'Interactive charts, filtered GL tables, heatmap variance sheet'}
@@ -195,26 +251,28 @@ var projectData={
     subtitle:'',
     tag:'DATA PIPELINE - AUTOMATION - FINANCE OPS',
     accent:'#BF00FF',
-    desc:'Cash application automation that matches AR, Customer Master, and consolidated invoice data into a clean, audit-ready output for finance teams.',
+    desc:'Cash application automation for finance operations, supported by two daily Automation Anywhere bots: one bot downloads the customer open dump (open line items) from SAP, and the second bot collects payment advices from email every day for downstream matching and reconciliation.',
     overview:[
       {label:'Type',value:'Automated AR matching pipeline'},
-      {label:'Inputs',value:'Open AR, Customer Master, Consolidated Invoice Extract'},
+      {label:'Inputs',value:'SAP open dump, payment advices from email, Customer Master, Consolidated Invoice Extract'},
       {label:'Output',value:'Comparison file with match, mismatch, and missing flags'},
-      {label:'Use Case',value:'Cash application and accounts receivable operations'}
+      {label:'Use Case',value:'Cash application and accounts receivable operations'},
+      {label:'Bot Schedule',value:'2 Automation Anywhere bots running daily'}
     ],
     features:[
+      {icon:'-',text:'Automation Anywhere bot downloads the customer open dump (open line items) directly from SAP every day'},
+      {icon:'-',text:'Automation Anywhere bot collects all daily payment advices from email for cash application processing'},
       {icon:'-',text:'Cross-matches AR records against Customer Master and consolidated invoice data'},
       {icon:'-',text:'Flags matches, mismatches, and records missing from the AR system'},
       {icon:'-',text:'Produces a clean, audit-ready comparison output for cash application teams'},
-      {icon:'-',text:'Supports reconciliation workflows with faster exception visibility'},
-      {icon:'-',text:'Ongoing A360 automation: payment advice extraction (every 15 minutes) and SAP line item extraction'}
+      {icon:'-',text:'Supports reconciliation workflows with faster exception visibility through daily automated bot runs'}
     ],
-    techStack:['Python','Pandas','openpyxl','Excel (XLSX)'],
+    techStack:['Automation Anywhere 360','SAP','Microsoft Outlook / Email','Python','Pandas','openpyxl','Excel (XLSX)'],
     tools:[],
     impact:[
-      'Reduces manual reconciliation effort for AR teams.',
-      'Improves reconciliation speed and accuracy.',
-      'Provides clear visibility into mismatches and missing records.'
+      'Eliminates daily manual effort for SAP open-line-item extraction and payment advice collection.',
+      'Improves reconciliation speed and accuracy by feeding the matching process with fresh daily inputs.',
+      'Provides clear visibility into mismatches and missing records for cash application teams.'
     ],
     images:[
       {src:'assets/trailbalance/a360/CashApp_DataFlow.png',label:'Data Flow Architecture'}
@@ -293,18 +351,79 @@ var projectData={
       {label:'Goal',value:'Scalable finance assurance automation framework'}
     ],
     features:[
-      {icon:'-',text:'Workflow discovery and refinement of finance assurance steps and handoffs'},
-      {icon:'-',text:'Identification of technically feasible assurance checks and automation points'},
-      {icon:'-',text:'Development of data-driven assurance analytics and exception testing logic'},
-      {icon:'-',text:'Blueprint for evidence collection, traceability, and audit trail standardization'},
-      {icon:'-',text:'Progressive development roadmap for internal finance assurance automation'}
+      {icon:'-',text:'Read-only extraction from SAP ECC financial tables including BKPF, BSEG, BSID, and BSAD through an RFC/BAPI integration layer'},
+      {icon:'-',text:'Custom SAP RFC functions designed for GL, AR, and AP data retrieval to support assurance-ready source capture'},
+      {icon:'-',text:'Python-based connectivity and processing layer using the SAP RFC SDK for data cleaning, transformation, and mapping'},
+      {icon:'-',text:'Audit intelligence engine combining rule-based checks such as high-value transactions, duplicate detection, and weekend postings'},
+      {icon:'-',text:'AI/ML-ready anomaly detection and pattern recognition layer to strengthen risk identification and exception discovery'},
+      {icon:'-',text:'Structured output architecture delivering Excel reports, Power BI dashboards, exception reports, and SharePoint-backed audit storage'}
     ],
     techStack:[],
     tools:[],
     impact:[
-      'Creates a structured roadmap for refining and automating finance assurance workflows.',
-      'Targets technically feasible, repeatable checks to improve assurance quality.',
-      'Sets the foundation for scalable internal finance assurance development.'
+      'Creates an end-to-end finance assurance architecture from SAP source extraction to reporting and evidence storage.',
+      'Improves control testing coverage through automated rule checks for high-value, duplicate, and unusual posting activity.',
+      'Reduces manual assurance effort by standardizing data extraction, transformation, and exception reporting in one flow.',
+      'Builds a scalable foundation for future AI-driven anomaly detection and broader audit analytics across finance processes.'
+    ],
+    flowArchitecture:[
+      {src:'assets/New folder/FA.jpeg',label:'Finance Assurance Flow Architecture'}
+    ],
+    images:[]
+  },
+  'copilot-agent':{
+    title:'GMR INTELLIGENCE ENGINE',
+    subtitle:'COPILOT-BASED STRATEGIC INTELLIGENCE AGENT',
+    tag:'COPILOT AGENT - REAL-TIME STRATEGIC INTELLIGENCE',
+    accent:'#f0a500',
+    stackedLayout:true,
+    desc:'GMR Intelligence Engine is a custom-configured Copilot agent designed as a strategic intelligence system for GMR. The prompt architecture forces the agent to research live, verify sources, apply a GMR-specific lens, benchmark competitors, and convert every external signal into decision-ready intelligence with clear next actions.',
+    overview:[
+      {label:'Platform',value:'Microsoft Copilot custom agent'},
+      {label:'Core Purpose',value:'Intercept live external signals and convert them into GMR-specific decision-ready intelligence'},
+      {label:'Prompt Design',value:'Adaptive intelligence, research rules, GMR business DNA, guardrails, and response architecture'},
+      {label:'Business Lens',value:'GMR units, live priorities, strategic lenses, competitor watchlists, risks, and opportunities'},
+      {label:'Output Style',value:'Intelligence Verdict first, then analyst-style interpretation, action, and escalation guidance'}
+    ],
+    features:[
+      {icon:'-',text:'Prime Directive: every response must answer two business questions clearly, what the signal means for GMR and what GMR should do about it.'},
+      {icon:'-',text:'Adaptive Intelligence Layer: the prompt makes the agent detect tone, role, language, and intent automatically so the response changes for leadership, operations, strategy, and conversational requests without asking the user who they are.'},
+      {icon:'-',text:'Intelligence Principles: the configuration enforces live research every time, source-tier citation, zero fabrication, confidence tagging, anti-hallucination checks, and relevance discipline.'},
+      {icon:'-',text:'GMR Business DNA: the prompt embeds business units, technology and digital areas, corporate functions, strategic lenses, live priorities, and competitor watchlists so the output stays tightly aligned to GMR.'},
+      {icon:'-',text:'Competitor Watch Benchmarking: the agent is instructed to compare GMR against defined airport, energy, and infrastructure competitors using sourced positioning rather than opinion.'},
+      {icon:'-',text:'Guardrails: the prompt controls information sensitivity, source integrity, competitor ethics, legal and regulatory caution, escalation, and audience awareness so critical topics are handled responsibly.'},
+      {icon:'-',text:'Response Rules: every answer must begin with an Intelligence Verdict, maintain GMR context throughout, adapt depth to the user request, and close with a forward-looking strategic next step.'},
+      {icon:'-',text:'Activation Flow: the prompt defines a full operating sequence from detect, adapt, classify, research, verify, filter, benchmark, and lens through to final delivery.'}
+    ],
+    techStack:['Microsoft Copilot','Prompt Engineering','Strategic Intelligence Design','Competitive Intelligence Framework','Research Governance'],
+    tools:[],
+    impact:[
+      'Transforms a generic Copilot agent into a GMR-specific intelligence engine with a clearly defined mission and operating discipline.',
+      'Improves executive and operational clarity by forcing every answer to connect live signals with GMR relevance, competitive context, and recommended action.',
+      'Creates a repeatable prompt framework for strategic research, competitive intelligence, risk interpretation, and leadership-ready briefings.',
+      'Demonstrates how strong prompt architecture can govern research quality, business alignment, and response behavior even before adding downstream automation.'
+    ],
+    architectureBlocks:[
+      {
+        step:'Block 01',
+        title:'Identity, Mission, And Adaptive Layer',
+        text:'The prompt first defines the agent as GMR Intelligence Engine, not a chatbot, and then adds an adaptive layer so it can read tone, role, and intent automatically before deciding how to respond.'
+      },
+      {
+        step:'Block 02',
+        title:'Intelligence Principles And Verification',
+        text:'The second layer controls research quality. It requires live web research, source tiers, zero fabrication, confidence tagging, anti-hallucination checks, relevance discipline, and proactive radar for adjacent signals.'
+      },
+      {
+        step:'Block 03',
+        title:'GMR Business DNA And Strategic Lens',
+        text:'The third layer injects GMR context by defining units, functions, strategic lenses, live priorities, and competitor watchlists, which ensures the answer is filtered through GMR strategy rather than generic market commentary.'
+      },
+      {
+        step:'Block 04',
+        title:'Guardrails, Delivery, And Activation Flow',
+        text:'The final layer defines guardrails for sensitivity, source ethics, legal caution, escalation, and audience awareness, then structures delivery around the Intelligence Verdict, action framing, and an end-to-end activation flow from signal detection to final output.'
+      }
     ],
     images:[]
   }
@@ -392,6 +511,7 @@ function renderProject(pid){
   
   var details=document.getElementById('details-section');
   details.innerHTML='';
+  details.className='feature-grid'+(p.stackedLayout?' stacked-layout':'');
   
   var featuresDiv=document.createElement('div');
   featuresDiv.className='detail-block';
@@ -489,19 +609,85 @@ function renderProject(pid){
     rightCol.appendChild(toolsDiv);
   }
 
-  if(impactDiv){
-    if(p.techStack && p.techStack.length)leftCol.appendChild(impactDiv);
-    else rightCol.appendChild(impactDiv);
+  if(p.stackedLayout){
+    var splitGrid=document.createElement('div');
+    splitGrid.className='split-grid';
+    if(impactDiv)splitGrid.appendChild(impactDiv);
+    if(rightCol.childNodes.length>0)splitGrid.appendChild(rightCol);
+    details.appendChild(leftCol);
+    if(splitGrid.childNodes.length>0)details.appendChild(splitGrid);
+  }else{
+    if(impactDiv){
+      if(p.techStack && p.techStack.length)leftCol.appendChild(impactDiv);
+      else rightCol.appendChild(impactDiv);
+    }
+    
+    details.appendChild(leftCol);
+    details.appendChild(rightCol);
   }
-  
-  details.appendChild(leftCol);
-  details.appendChild(rightCol);
   
   var imgSection=document.getElementById('images-section');
   imgSection.innerHTML='';
   imgSection.style.display='block';
+  var architectureSection=document.getElementById('architecture-section');
+  architectureSection.innerHTML='';
+  architectureSection.style.display='none';
   var v2Section=document.getElementById('version2-section');
   v2Section.innerHTML='';
+
+  if(p.architectureBlocks && p.architectureBlocks.length){
+    architectureSection.style.display='block';
+    architectureSection.className='architecture-section';
+    var aTitle=document.createElement('h2');
+    aTitle.className='section-title';
+    aTitle.textContent='INTELLIGENCE ENGINE FLOW';
+    architectureSection.appendChild(aTitle);
+
+    var aGrid=document.createElement('div');
+    aGrid.className='architecture-grid';
+    p.architectureBlocks.forEach(function(block){
+      var card=document.createElement('div');
+      card.className='architecture-card';
+      var step=document.createElement('div');
+      step.className='architecture-step';
+      step.textContent=block.step || '';
+      card.appendChild(step);
+      var title=document.createElement('div');
+      title.className='architecture-title';
+      title.textContent=block.title || '';
+      card.appendChild(title);
+      var text=document.createElement('div');
+      text.className='architecture-text';
+      text.textContent=block.text || '';
+      card.appendChild(text);
+      aGrid.appendChild(card);
+    });
+    architectureSection.appendChild(aGrid);
+  }
+  
+  if(p.flowArchitecture && p.flowArchitecture.length>0){
+    var faTitle=document.createElement('h2');
+    faTitle.className='section-title';
+    faTitle.textContent='FLOW ARCHITECTURE';
+    imgSection.appendChild(faTitle);
+
+    var faGallery=document.createElement('div');
+    faGallery.className='images-gallery';
+    p.flowArchitecture.forEach(function(img){
+      var faCard=document.createElement('div');
+      faCard.className='image-card';
+      var faImg=document.createElement('img');
+      faImg.src=img.src;
+      faImg.alt=img.label;
+      faCard.appendChild(faImg);
+      var faLabel=document.createElement('div');
+      faLabel.className='image-label';
+      faLabel.textContent=img.label;
+      faCard.appendChild(faLabel);
+      faGallery.appendChild(faCard);
+    });
+    imgSection.appendChild(faGallery);
+  }
   
   if(p.images && p.images.length>0){
     var iTitle=document.createElement('h2');
@@ -535,7 +721,7 @@ function renderProject(pid){
       gallery.appendChild(card);
     });
     imgSection.appendChild(gallery);
-  }else{
+  }else if(!(p.flowArchitecture && p.flowArchitecture.length>0)){
     imgSection.style.display='none';
   }
 
@@ -701,6 +887,9 @@ function renderProject(pid){
       v2Section.appendChild(v2Gallery);
     }
   }
+
+  queueReveal(document);
+  bindReveals(document);
 }
 
 var pid=getProjectId();
