@@ -129,11 +129,9 @@ var projects=[
     ],
     techStack:[
       'Python 3.10',
-      'Groq API (Llama3-70B)',
+      'Groq API',
       'Tavily Search API',
       'Scheduling - Cron Jobs',
-      'FastAPI',
-      'Pydantic v2',
       'SMTP Integration'
     ],
     results:'Weekly briefing agent processes 50+ news sources per inference run. Average response time: ~200ms per reasoning cycle. Insight accuracy rate: 96% (verified against manual review). Supports enterprise-scale deployments across 10+ stakeholder accounts.',
@@ -142,9 +140,9 @@ var projects=[
   {
     id:'tb',
     title:'TB ANALYSER',
-    tag:'STREAMLIT · PYTHON · ANALYTICS',
+    tag:'R2R - Record to Report',
     accent:'#00FFFF',
-    desc:'Professional Trial Balance analysis dashboard built with Streamlit for enterprise finance teams. Enables simultaneous multi-file Excel ingestion and comprehensive GL-level financial analysis. Supports advanced variance tracking across multiple fiscal periods with real-time insights.',
+    desc:'Professional Trial Balance analysis Web application built with Streamlit for enterprise finance teams. Enables simultaneous multi-file Excel ingestion and comprehensive GL-level financial analysis. Supports advanced variance tracking across multiple fiscal periods with real-time insights.',
     images:[
       {src:'assets/trailbalance/web/TB Analyzer - 1.png',alt:'TB Dashboard Main View'},
       {src:'assets/trailbalance/web/TB Analyzer - 2.png',alt:'GL Filter & Analysis'}
@@ -153,7 +151,7 @@ var projects=[
     features:[
       'Multi-file Excel uploader supporting XLSX and XLS formats',
       'GL-level filtering and interactive data exploration',
-      'Month-wise accumulated balance tracking (Apr–Nov)',
+      'Month-wise accumulated balance tracking (Apr–May)',
       'KPI variance cards with visual performance indicators',
       'Multi-line charts for balance trajectory analysis',
       'Grouped bar charts for month-to-month comparisons',
@@ -161,38 +159,36 @@ var projects=[
     ],
     techStack:[
       'Streamlit',
-      'Python 3.10',
+      'Python 3.14',
       'Pandas',
-      'Plotly & Altair',
       'openpyxl & xlrd'
     ],
-    results:'Automated financial analysis reducing manual data entry by 80%. Enables real-time variance analysis for multi-file TB datasets. Deployed across 5+ finance teams. Success rate: 99.1%',
+    results:'Automated financial analysis reducing manual effort by 80%. Enables real-time variance analysis for multi-file TB datasets.',
     isHero:false
   },
   {
     id:'cashapp',
-    title:'CASH APPLICATION',
-    tag:'PANDAS · DATA PIPELINE · AUTOMATION',
+    title:'CASH APPLICATION - DIAL',
+    tag:'O2C - Order to Cash',
     accent:'#BF00FF',
-    desc:'Automated invoice reconciliation system that intelligently integrates multi-source data (AR, Payout, Bank) and performs advanced normalization, deduplication, and amount-based matching. Delivers comprehensive reconciliation reports with detailed status tracking and audit trails.',
+    desc:'An automated Cash Application DIAL Bot that intelligently downloads bank statements, identifies customers and invoices, validates payments, handles TDS, and posts and clears entries in SAP to enable faster, accurate, and compliant cash application.',
     images:[
       {src:'assets/trailbalance/a360/CashApp_DataFlow.png',alt:'Invoice Reconciliation Architecture'}
     ],
     features:[
-      'Three-source data integration (AR, Payout, Bank streams)',
-      'Intelligent data normalization and cleansing',
-      'Advanced deduplication using cryptographic hashing',
-      'Customer master data enrichment and join operations',
-      'Amount-based reconciliation matching algorithm',
-      'Comprehensive status flag reporting system',
-      'Excel-based output with executive summary'
+      'Multi-source integration of SAP AR, bank statements, and payment advice streams',
+      'Automated data extraction, normalization, and cleansing using RPA and rules engines',
+      'Duplicate transaction detection and prevention through intelligent validation logic',
+      'AI/NLP-based customer master data enrichment and SAP mapping',
+      'Rules-driven invoice and amount reconciliation with TDS and tolerance handling',
+      'End-to-end status flagging with exception tracking and worklist routing',
+      'SAP-ready reporting outputs enabling faster posting, clearing, and audit compliance'
     ],
     techStack:[
-      'Python 3.10',
-      'Pandas',
-      'openpyxl',
-      'SQLAlchemy ORM',
-      'NumPy'
+      'Python',
+      'Robotic Process Automation (A360)',
+      'Artificial Intelligence',
+      'Document AI / Intelligent Document Processing (IDP)'
     ],
     results:'Automated pipeline processes 100,000+ transactions monthly. Reduced manual reconciliation from 40+ hours to under 2 hours per cycle. Accuracy rate: 99.2% with zero false positives.',
     isHero:false
@@ -200,9 +196,9 @@ var projects=[
   {
     id:'pbi',
     title:'POWER BI AUTOMATION',
-    tag:'PYTHON · POWER BI API · SCHEDULING',
+    tag:'HR Analytics Dashboard',
     accent:'#00e5a0',
-    desc:'Enterprise-grade Power BI refresh automation pipeline that schedules intelligent dataset updates, orchestrates fresh data extraction from multiple sources, and triggers dashboard refreshes at optimal intervals for maximum stakeholder reach and data freshness.',
+    desc:'Enterprise-grade Power BI refresh automation pipeline that schedules, updates Dataset, orchestrates fresh data extraction from multiple sources, and triggers dashboard refreshes at optimal intervals for maximum stakeholder reach and data freshness.',
     features:[
       'Automated email attachment collection using Microsoft Power Automate.',
       'Automatically downloads and stores received data files in a shared folder.',
@@ -214,7 +210,7 @@ var projects=[
       'Automation: Microsoft Power Automate',
       'Email Integration: Microsoft Outlook'
     ],
-    results:'Eliminated 100% of manual Power BI refresh operations. 12+ enterprise reports now auto-generated and distributed daily. Saved 15+ hours per week of manual labor. 99.8% uptime SLA achieved.',
+    results:'Eliminated 100% of manual Power BI refresh operations. 4 enterprise reports now auto-generated and Update daily.',
     isHero:false
   }
 ];
