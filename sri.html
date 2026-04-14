@@ -8,7 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#050508;color:#ccd;font-family:'Syne',sans-serif;overflow-x:hidden;cursor:auto}
+body{background:#050508;color:#ccd;font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#08080d}::-webkit-scrollbar-thumb{background:#00FFFF;border-radius:2px}
 :root{--c:#00FFFF;--p:#BF00FF;--g:#00e5a0;--bg:#050508;--card:#0a0a10;--bc:rgba(0,255,255,.18);--ease:cubic-bezier(.2,.8,.2,1)}
 body::before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:-1;background:conic-gradient(from 120deg at 25% 40%,rgba(0,255,255,.08),transparent 40%,rgba(191,0,255,.07),transparent 80%),radial-gradient(circle at 75% 70%,rgba(0,229,160,.08),transparent 42%);filter:blur(18px);animation:meshSpin 28s linear infinite}
@@ -22,16 +22,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .bg-layer.l1{width:340px;height:340px;left:-80px;top:8%;background:radial-gradient(circle,rgba(0,255,255,.7),transparent 68%)}
 .bg-layer.l2{width:420px;height:420px;right:-130px;top:42%;background:radial-gradient(circle,rgba(191,0,255,.65),transparent 70%)}
 .bg-layer.l3{width:280px;height:280px;left:40%;bottom:-90px;background:radial-gradient(circle,rgba(0,229,160,.62),transparent 70%)}
-body.low-motion::before,body.low-motion::after,body.low-motion .dot-canvas,body.low-motion #ambient,body.low-motion #bg-parallax{display:none}
-body.low-motion .hbg-grad,body.low-motion .hbg-scan,body.low-motion .ttrack,body.low-motion .hpt,body.low-motion .smdot,body.low-motion .stxt,body.low-motion .hg1,body.low-motion .hg2{animation:none!important}
-body.low-motion .chip,body.low-motion .pcard,body.low-motion .hstat,body.low-motion .detail-shell{transition:none!important}
-body.low-motion .pcard{transform:none!important}
 @keyframes meshSpin{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.06)}to{transform:rotate(360deg) scale(1)}}
 @keyframes ambientSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 /* CURSOR */
-#cdot{position:fixed;top:0;left:0;width:10px;height:10px;background:#00FFFF;border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 12px rgba(0,255,255,.9),0 0 24px rgba(0,255,255,.45);will-change:transform,opacity;opacity:0;transform:translate3d(-100px,-100px,0) translate(-50%,-50%)}
-#cring{position:fixed;top:0;left:0;width:34px;height:34px;border:1.75px solid rgba(0,255,255,.95);border-radius:50%;pointer-events:none;z-index:9998;box-shadow:0 0 18px rgba(0,255,255,.38),inset 0 0 10px rgba(0,255,255,.12);background:rgba(0,255,255,.04);will-change:transform,opacity;opacity:0;transform:translate3d(-100px,-100px,0) translate(-50%,-50%)}
-body.custom-cursor-active,body.custom-cursor-active *,body.custom-cursor-active *::before,body.custom-cursor-active *::after{cursor:none!important}
+#cdot{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--c);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 10px var(--c);mix-blend-mode:screen;will-change:transform,opacity}
+#cring{position:fixed;top:0;left:0;width:32px;height:32px;border:2px solid var(--c);border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:screen;will-change:transform,opacity;border-color:rgba(0,255,255,.7)}
+@media(hover:hover) and (pointer:fine){*,*::before,*::after{cursor:none!important}}
+@media(hover:none),(pointer:coarse){body{cursor:auto}#cdot,#cring{display:none}}
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .72s ease,transform .72s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
@@ -110,7 +107,6 @@ body.custom-cursor-active,body.custom-cursor-active *,body.custom-cursor-active 
 @keyframes workLine{0%{transform:scaleX(.08);opacity:0;transform-origin:left center}45%{transform:scaleX(1);opacity:1;transform-origin:left center}100%{transform:scaleX(1);opacity:.82;transform-origin:left center}}
 .detail-shell{margin-top:1.35rem;border:1px solid rgba(120,225,255,.22);border-radius:1.3rem;background:linear-gradient(180deg,rgba(9,12,22,.92),rgba(6,8,16,.97));box-shadow:0 24px 48px rgba(0,0,0,.42),0 0 0 1px rgba(0,255,255,.06) inset;overflow:hidden;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease,border-color .3s ease}
 .detail-shell.open{opacity:1;transform:translateY(0);pointer-events:auto}
-.detail-shell,.pblock{content-visibility:auto;contain-intrinsic-size:1px 420px}
 .detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.15rem 1.2rem;border-bottom:1px solid rgba(120,225,255,.12);background:linear-gradient(180deg,rgba(0,255,255,.05),rgba(191,0,255,.03))}
 .detail-copy{display:grid;gap:.45rem}
 .detail-kicker{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:rgba(0,255,255,.72)}
@@ -514,34 +510,48 @@ schedule.<span class="fn">every</span>().day.<span class="fn">at</span>(<span <s
         schedule.<span class="fn">run_pending</span>()
         time.<span class="fn">sleep</span>(<span class="num">60</span>)
 </pre>
+  <pre id="c-pbi">
+<span class="cm"># automate.py &#8212; Power BI Automation Pipeline</span>
+<span class="cm"># REPLACE THIS FILE PATH: ./code/pbi_automate.py</span>
+
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> requests, schedule, time, os
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+
+WORKSPACE_ID = <span class="str">"YOUR_WORKSPACE_ID"</span>
+DATASET_ID   = <span class="str">"YOUR_DATASET_ID"</span>
+TOKEN        = os.<span class="fn">getenv</span>(<span class="str">"PBI_TOKEN"</span>)
+
+<span class="kw">def</span> <span class="fn">refresh_dataset</span>():
+    url = <span class="str">"https://api.powerbi.com/v1.0/myorg/groups/"</span> + WORKSPACE_ID + <span class="str">"/datasets/"</span> + DATASET_ID + <span class="str">"/refreshes"</span>
+    headers = {<span class="str">"Authorization"</span>: <span class="str">"Bearer "</span> + TOKEN}
+    r = requests.<span class="fn">post</span>(url, headers=headers)
+    <span class="kw">return</span> r.status_code == <span class="num">202</span>
+
+<span class="kw">def</span> <span class="fn">prepare_data</span>(filepath):
+    df = pd.<span class="fn">read_excel</span>(filepath)
+    df.<span class="fn">dropna</span>(inplace=<span class="kw">True</span>)
+    df[<span class="str">"date"</span>] = pd.<span class="fn">to_datetime</span>(df[<span class="str">"date"</span>])
+    df[<span class="str">"amount"</span>] = df[<span class="str">"amount"</span>].<span class="fn">round</span>(<span class="num">2</span>)
+    <span class="kw">return</span> df
+
+schedule.<span class="fn">every</span>().<span class="fn">day</span>.<span class="fn">at</span>(<span class="str">"06:00"</span>).<span class="fn">do</span>(refresh_dataset)
+<span class="kw">while</span> <span class="kw">True</span>:
+    schedule.<span class="fn">run_pending</span>()
+    time.<span class="fn">sleep</span>(<span class="num">60</span>)
+  </pre>
 </div>
 
 <script>
 (function(){
 'use strict';
 var NS='http://www.w3.org/2000/svg';
-var CURSOR_INTERACTIVE_SELECTOR='a,button,[role="button"],.chip,.pcard,.detail-btn,.hstat.is-link,#iclose';
 
 var cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
-var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var lowMotionMode=prefersReducedMotion;
-if(lowMotionMode)document.body.classList.add('low-motion');
+var hasFinePointer=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 var mx=innerWidth*.5,my=innerHeight*.5,tx=.5,ty=.5,cx=.5,cy=.5,rx=mx,ry=my;
-var dotX=mx,dotY=my,ringX=mx,ringY=my;
-var pageVisible=document.visibilityState!=='hidden';
-var ambient=document.getElementById('ambient');
-var bgLayers=[].slice.call(document.querySelectorAll('.bg-layer'));
-var targetOpacity=.72;
-var customCursorActive=false;
-document.body.classList.remove('custom-cursor-active');
-document.body.style.cursor='auto';
-document.addEventListener('visibilitychange',function(){pageVisible=document.visibilityState!=='hidden';});
-function activateCustomCursor(){
-  if(customCursorActive||prefersReducedMotion||!cdot||!cring)return;
-  customCursorActive=true;
-  document.body.classList.add('custom-cursor-active');
-  document.body.style.cursor='none';
-}
+var dotX=mx,dotY=my,ringX=mx,ringY=my,targetOpacity=.72;
+if(hasFinePointer){document.body.style.cursor='none';}else{document.body.style.cursor='auto';}
 
 var workSection=document.getElementById('work');
 var workCopy=document.querySelector('.work-copy');
@@ -581,50 +591,27 @@ document.querySelectorAll('[data-scroll-target]').forEach(function(node){
 
 /* PARTICLES */
 var ptw=document.getElementById('hpts');
-if(!lowMotionMode){
-  for(var i=0;i<12;i++){
-    var pt=document.createElement('div');pt.className='hpt';
-    var col=['#00FFFF','#BF00FF'][i%2];
-    pt.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;background:'+col+';box-shadow:0 0 6px '+col+';--d:'+(3+Math.random()*3.5).toFixed(2)+'s;--dl:'+(Math.random()*3).toFixed(2)+'s';
-    ptw.appendChild(pt);
-  }
+for(var i=0;i<22;i++){
+  var pt=document.createElement('div');pt.className='hpt';
+  var col=['#00FFFF','#BF00FF'][i%2];
+  pt.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;background:'+col+';box-shadow:0 0 6px '+col+';--d:'+(3+Math.random()*3.5).toFixed(2)+'s;--dl:'+(Math.random()*3).toFixed(2)+'s';
+  ptw.appendChild(pt);
 }
 window.addEventListener('mousemove',function(e){
-  activateCustomCursor();
   mx=e.clientX;my=e.clientY;tx=mx/innerWidth;ty=my/innerHeight;
-},{passive:true});
-window.addEventListener('mouseover',function(){targetOpacity=.72;});
-window.addEventListener('mouseout',function(e){
-  if(!e.relatedTarget)targetOpacity=0;
 });
-if(!prefersReducedMotion){
-  (function bgRaf(){
-    if(pageVisible){
-      if(customCursorActive&&cdot&&cring){
-        dotX+=(mx-dotX)*0.35;dotY+=(my-dotY)*0.35;
-        ringX+=(mx-ringX)*0.12;ringY+=(my-ringY)*0.12;
-        cdot.style.transform='translate3d('+dotX.toFixed(2)+'px,'+dotY.toFixed(2)+'px,0) translate(-50%,-50%)';
-        cring.style.transform='translate3d('+ringX.toFixed(2)+'px,'+ringY.toFixed(2)+'px,0) translate(-50%,-50%)';
-        cdot.style.opacity='1';
-        cring.style.opacity=(parseFloat(cring.style.opacity||'0.72')+(targetOpacity-parseFloat(cring.style.opacity||'0.72'))*.2).toFixed(3);
-      }
-      if(!lowMotionMode){
-        if(ambient){
-          ambient.style.setProperty('--mx',(tx*100).toFixed(1)+'%');
-          ambient.style.setProperty('--my',(ty*100).toFixed(1)+'%');
-        }
-        if(bgLayers.length){
-          var shiftX=(tx-.5)*28;
-          var shiftY=(ty-.5)*18;
-          bgLayers[0].style.transform='translate3d('+(shiftX*-0.35).toFixed(2)+'px,'+(shiftY*-0.25).toFixed(2)+'px,0)';
-          bgLayers[1].style.transform='translate3d('+(shiftX*0.28).toFixed(2)+'px,'+(shiftY*0.18).toFixed(2)+'px,0)';
-          bgLayers[2].style.transform='translate3d('+(shiftX*0.16).toFixed(2)+'px,'+(shiftY*-0.22).toFixed(2)+'px,0)';
-        }
-      }
-    }
-    requestAnimationFrame(bgRaf);
-  })();
-}
+window.addEventListener('mouseover',function(){targetOpacity=.72;});
+window.addEventListener('mouseout',function(){targetOpacity=0;});
+(function bgRaf(){
+  if(hasFinePointer&&cdot&&cring){
+    dotX+=(mx-dotX)*0.35;dotY+=(my-dotY)*0.35;
+    ringX+=(mx-ringX)*0.12;ringY+=(my-ringY)*0.12;
+    cdot.style.transform='translate3d('+dotX.toFixed(2)+'px,'+dotY.toFixed(2)+'px,0) translate(-50%,-50%)';
+    cring.style.transform='translate3d('+ringX.toFixed(2)+'px,'+ringY.toFixed(2)+'px,0) translate(-50%,-50%)';
+    cring.style.opacity=(parseFloat(cring.style.opacity||'0.72')+(targetOpacity-parseFloat(cring.style.opacity||'0.72'))*.2).toFixed(3);
+  }
+  requestAnimationFrame(bgRaf);
+})();
 
 /* REVEAL */
 var ro=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.07});
@@ -728,7 +715,7 @@ var AGENT_SS2  = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAGkCAIAAABc
 /* DESCRIPTIONS */
 var TB_DESC    = "<span class=\"t-line t-dim\">TB ANALYSER \u2014 Project Overview</span>\n<br>\n<br>\n<span class=\"t-section\">// WHAT IS IT?</span>\n<br>\n<span class=\"t-line t-dim\">TB Analyser is a machine learning system designed to detect</span>\n<span class=\"t-line t-dim\">tuberculosis from chest X-ray images using deep learning.</span>\n<span class=\"t-line t-dim\">The system provides real-time classification with confidence</span>\n<span class=\"t-line t-dim\">scoring and Grad-CAM heatmap visualisation for clinical use.</span>\n<br>\n<span class=\"t-section\">// HOW IT WORKS?</span>\n<br>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">X-ray image is uploaded via the web interface</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Image preprocessed: resized to 224x224, normalised 0-1</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Passed through a fine-tuned EfficientNetB0 CNN</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Output: TB Positive / Negative + confidence score</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Grad-CAM overlay highlights suspicious regions</span></span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<br>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Python 3.10 + TensorFlow 2.12</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">FastAPI for REST inference endpoint</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">React frontend with real-time results</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">OpenCV for image preprocessing</span></span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Scikit-learn for evaluation metrics</span></span>\n<br>\n<span class=\"t-section\">// RESULTS</span>\n<br>\n<span class=\"t-line\"><span class=\"t-warn\">Test Accuracy:</span>   94.2%</span>\n<span class=\"t-line\"><span class=\"t-warn\">Sensitivity:</span>     91.8%</span>\n<span class=\"t-line\"><span class=\"t-warn\">Specificity:</span>     96.1%</span>\n<span class=\"t-section\">// AUC-ROC:         0.97</span>\n<br>\n<span class=\"t-line t-dim\">Replace this file with your own description.txt</span>\n<br>";
 var CASH_DESC  = "<span class=\"t-section\">// CASH APP \u2014 OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Full-stack financial management application</span>\n<span class=\"t-line t-dim\">  with real-time transaction tracking and audit trail.</span>\n<br>\n<span class=\"t-section\">// REPLACE THIS SECTION</span>\n<span class=\"t-line t-dim\">  Paste your Cash App description.txt content here.</span>\n<br>\n<span class=\"t-section\">// FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> Real-time transaction processing</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> JWT authentication + refresh tokens</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> PostgreSQL with indexed queries</span>\n<span class=\"t-line\"><span class=\"t-hi\">&#10022;</span> Role-based access control</span>\n<br>\n<span class=\"t-section\">// METRICS</span>\n<span class=\"t-line t-warn\">API Response:  &lt;50ms average</span>\n<span class=\"t-line t-warn\">DB Query:      &lt;10ms p95</span>\n<span class=\"t-line t-warn\">Uptime:        99.9%</span>";
-var PBI_DESC   = "<span class=\"t-section\">// POWER BI AUTOMATION - OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Email-to-dashboard automation that ingests daily files</span>\n<span class=\"t-line t-dim\">  and stores them in a shared folder for streamlined reporting.</span>\n<br>\n<span class=\"t-section\">// AUTOMATION FLOW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Outlook receives the daily data file</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Power Automate detects attachment and saves it to OneDrive/SharePoint</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Reporting files are centralized in shared storage</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Power BI connects to the prepared reporting source</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Dashboards use the latest available reporting inputs</span>\n<br>\n<span class=\"t-section\">// KEY FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automated email attachment collection</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automatic file download and centralized storage</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Clean handoff into the Power BI reporting workflow</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Reduced manual file chasing for business users</span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Microsoft Power BI, Power Automate, Outlook</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> OneDrive/SharePoint shared folder storage</span>\n<br>\n<span class=\"t-section\">// IMPACT</span>\n<span class=\"t-line t-warn\">Manual handling reduced across daily file intake and reporting prep</span>\n<span class=\"t-line t-warn\">Consistent shared-source availability for reporting teams</span>\n<br>\n<span class=\"t-section\">// ONGOING AUTOMATION INITIATIVES</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Trial Balance Automation - SAP extraction bots (Automation Anywhere)</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Cash Application Automation - A360 bots for payment advice and line items</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Finance Assurance Automation - refining our own assurance workflow, identifying technical feasibility, and developing automations</span>";
+var PBI_DESC   = "<span class=\"t-section\">// POWER BI AUTOMATION - OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Email-to-dashboard automation that ingests daily files,</span>\n<span class=\"t-line t-dim\">  stores them in a shared folder, and refreshes Power BI on schedule.</span>\n<br>\n<span class=\"t-section\">// AUTOMATION FLOW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Outlook receives the daily data file</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Power Automate detects attachment and saves it to OneDrive/SharePoint</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Power BI dataset reads from the shared folder</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Scheduled refresh runs daily at 10:00 AM</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Dashboards update without manual intervention</span>\n<br>\n<span class=\"t-section\">// KEY FEATURES</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automated email attachment collection</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Automatic file download and centralized storage</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Daily scheduled dataset refresh and report update</span>\n<span class=\"t-line\"><span class=\"t-hi\">*</span> Near real-time reporting with zero manual handling</span>\n<br>\n<span class=\"t-section\">// TECH STACK</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Microsoft Power BI, Power Automate, Outlook</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> OneDrive/SharePoint shared folder storage</span>\n<br>\n<span class=\"t-section\">// IMPACT</span>\n<span class=\"t-line t-warn\">Manual handling eliminated: daily file intake + refresh fully automated</span>\n<span class=\"t-line t-warn\">Operational cadence: consistent 10:00 AM dashboard availability</span>\n<br>\n<span class=\"t-section\">// ONGOING AUTOMATION INITIATIVES</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Trial Balance Automation - SAP extraction bots (Automation Anywhere)</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Cash Application Automation - A360 bots for payment advice and line items</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Finance Assurance Automation - refining our own assurance workflow, identifying technical feasibility, and developing automations</span>";
 var AGENT_DESC = "<span class=\"t-section\">// AI RESEARCH AGENT \u2014 OVERVIEW</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> Autonomous AI agent that researches, summarises,</span>\n<span class=\"t-line t-dim\">  and reports \u2014 fully automated via cron scheduling.</span>\n<br>\n<span class=\"t-section\">// REPLACE THIS SECTION</span>\n<span class=\"t-line t-dim\">  Paste your AI Agent description.txt content here.</span>\n<span class=\"t-line t-dim\">  Replace placeholder text with your actual write-up.</span>\n<br>\n<span class=\"t-section\">// HOW IT WORKS</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 1:</span> Cron job triggers agent at scheduled time</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 2:</span> Tavily API searches the web for context</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 3:</span> Groq LLM (Llama3-70B) processes + reasons</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 4:</span> Agent produces structured output / report</span>\n<span class=\"t-line\"><span class=\"t-prompt\">$</span> <span class=\"t-hi\">Step 5:</span> Result saved or distributed automatically</span>\n<br>\n<span class=\"t-section\">// KEY METRICS</span>\n<span class=\"t-line t-warn\">Inference Speed:  ~200ms (Groq)</span>\n<span class=\"t-line t-warn\">Search Results:   Top 5 per query (Tavily)</span>\n<span class=\"t-line t-warn\">Schedule:         Daily automated runs</span>";
 
 /* ═══════════════════════════════════════════════════════
@@ -773,7 +760,7 @@ var flipCards = [
 ═══════════════════════════════════════════════════════ */
 var projects = [
   {
-    id:'tb', title:'TB ANALYSER', tag:'R2R - Record to Report', accent:'#00FFFF',
+    id:'tb', title:'TB ANALYSER — TRIAL BALANCE WEB APP', tag:'R2R - RECORD TO REPORT', accent:'#00FFFF',
     preview:TB_PREV,
     desc:'Full-stack financial analytics web app for finance teams to upload, process, and analyze multi-period Trial Balance data across GL accounts. Ingests multiple Excel exports, computes month-wise cumulative balances, and surfaces insights with interactive charts and heatmap tables.',
     pills:['MULTI-FILE UPLOAD','GL FILTER','KPI VARIANCE','BALANCE TRACKING','HEATMAP GRID'],
@@ -880,7 +867,7 @@ var projects = [
     }
   },
   {
-    id:'cash', title:'CASH APPLICATION', tag:'O2C - Order to Cash', accent:'#BF00FF',
+    id:'cash', title:'CASH APP', tag:'O2C - ORDER TO CASH', accent:'#BF00FF',
     preview:CASH_PREV,
     desc:'An automated cash application pipeline that cross-matches open AR dumps against customer master and extracted invoice data to produce a clean comparison output file flagging matches, mismatches, and missing records. Merges three source files with intelligent invoice normalization, deduplication, and auto-detection of amount columns for seamless matching with tolerance-based validation.',
     pills:['CASH APP','AUTOMATION','FINANCE OPS'],
@@ -910,17 +897,18 @@ var projects = [
     }
   },
   {
-    id:'pbi', title:'POWER BI AUTOMATION', tag:'HR Analytics Dashboard', accent:'#00e5a0',
+    id:'pbi', title:'POWER BI AUTOMATION', tag:'HR DASHBOARD', accent:'#00e5a0',
     preview:null,
-    desc:'Email-driven Power BI automation that captures daily attachments via Power Automate and stores them in a shared folder to streamline dashboard reporting.',
-    pills:['POWER BI','POWER AUTOMATE','OUTLOOK','SHARED FOLDER','REPORTING FLOW'],
+    desc:'Email-driven Power BI automation that captures daily attachments via Power Automate, stores them in a shared folder, and refreshes dashboards at 10:00 AM for consistent, up-to-date reporting.',
+    pills:['POWER BI','POWER AUTOMATE','OUTLOOK','SHARED FOLDER','DAILY REFRESH'],
     assets:['DOCS'],
     buildPanel:function(inner){
+      inner.appendChild(codeBlock('c-pbi','automate.py','#00e5a0','REPLACE: ./code/pbi_automate.py'));
       inner.appendChild(termBlock(PBI_DESC,'description.txt · REPLACE: ./text/pbi-description.txt'));
     }
   },
   {
-    id:'assurance', title:'FINANCE ASSURANCE AUTOMATION', tag:'Finance and Accounting', accent:'#00e5a0',
+    id:'assurance', title:'FINANCE ASSURANCE AUTOMATION', tag:'FINANCE AND ACCOUNTS', accent:'#00e5a0',
     preview:null,
     desc:'Research-led finance assurance automation initiative focused on refining our own assurance workflow, identifying technical feasibility, and developing data-driven automations.',
     pills:['AUDIT WORKFLOWS','ASSURANCE ANALYTICS','R&D','PROCESS AUTOMATION','TECHNICAL FEASIBILITY'],
@@ -1134,32 +1122,19 @@ projects.forEach(function(p,idx){
     if(e.target.closest('a'))return;
     window.location.href='detail.html?id='+encodeURIComponent(p.id);
   });
-  var cardFx=0,cardState={rx:'0deg',ry:'0deg',mx:'50%',my:'50%'};
   card.addEventListener('mousemove',function(e){
-    if(lowMotionMode)return;
+    if(window.matchMedia('(hover:none)').matches)return;
     var r=card.getBoundingClientRect();
     var x=e.clientX-r.left;
     var y=e.clientY-r.top;
     var ry=((x/r.width)-.5)*9;
     var rx=((y/r.height)-.5)*-7;
-    cardState.rx=rx.toFixed(2)+'deg';
-    cardState.ry=ry.toFixed(2)+'deg';
-    cardState.mx=((x/r.width)*100).toFixed(1)+'%';
-    cardState.my=((y/r.height)*100).toFixed(1)+'%';
-    if(cardFx)return;
-    cardFx=requestAnimationFrame(function(){
-      card.style.setProperty('--rx',cardState.rx);
-      card.style.setProperty('--ry',cardState.ry);
-      card.style.setProperty('--mx',cardState.mx);
-      card.style.setProperty('--my',cardState.my);
-      cardFx=0;
-    });
+    card.style.setProperty('--rx',rx.toFixed(2)+'deg');
+    card.style.setProperty('--ry',ry.toFixed(2)+'deg');
+    card.style.setProperty('--mx',((x/r.width)*100).toFixed(1)+'%');
+    card.style.setProperty('--my',((y/r.height)*100).toFixed(1)+'%');
   });
   card.addEventListener('mouseleave',function(){
-    if(cardFx){
-      cancelAnimationFrame(cardFx);
-      cardFx=0;
-    }
     card.style.setProperty('--rx','0deg');
     card.style.setProperty('--ry','0deg');
     card.style.setProperty('--mx','50%');
@@ -1180,24 +1155,20 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
 // CONNECTED DOTS BACKGROUND
 (function(){
   var canvas=document.getElementById('dot-canvas');
-  if(!canvas||lowMotionMode)return;
+  if(!canvas)return;
   var ctx=canvas.getContext('2d');
   var dots=[];
   var pointer={x:null,y:null,active:false};
-  var linkDist=116;
-  var linkDistSq=linkDist*linkDist;
-  var pointerDist=180;
-  var pointerDistSq=pointerDist*pointerDist;
+  var linkDist=142;
+  var pointerDist=240;
   var dpr=1;
   var vw=window.innerWidth;
   var vh=window.innerHeight;
-  var lastFrame=0;
-  var frameStep=1000/30;
   
   function resizeCanvas(){
     vw=window.innerWidth;
     vh=window.innerHeight;
-    dpr=Math.min(window.devicePixelRatio||1,1.5);
+    dpr=window.devicePixelRatio||1;
     canvas.width=Math.floor(vw*dpr);
     canvas.height=Math.floor(vh*dpr);
     canvas.style.width=vw+'px';
@@ -1209,8 +1180,8 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
     dots=[];
     var w=vw;
     var h=vh;
-    var count=Math.floor((w*h)/52000);
-    var dotCount=Math.max(18,Math.min(32,count));
+    var count=Math.floor((w*h)/23000);
+    var dotCount=Math.max(48,Math.min(84,count));
     var cols=Math.max(6,Math.round(Math.sqrt(dotCount*(w/Math.max(h,1)))));
     var rows=Math.max(4,Math.ceil(dotCount/cols));
     var cellW=w/cols;
@@ -1221,22 +1192,13 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
       dots.push({
         x:(col+.5)*cellW+rand(-cellW*.22,cellW*.22),
         y:(row+.5)*cellH+rand(-cellH*.22,cellH*.22),
-        vx:rand(-0.08,0.08),
-        vy:rand(-0.08,0.08),
+        vx:rand(-0.12,0.12),
+        vy:rand(-0.12,0.12),
         r:rand(.8,1.5)
       });
     }
   }
-  function draw(now){
-    if(!pageVisible){
-      requestAnimationFrame(draw);
-      return;
-    }
-    if(now-lastFrame<frameStep){
-      requestAnimationFrame(draw);
-      return;
-    }
-    lastFrame=now;
+  function draw(){
     var w=vw;
     var h=vh;
     ctx.clearRect(0,0,w,h);
@@ -1252,11 +1214,11 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
       for(var b=a+1;b<dots.length;b++){
         var dx=dots[a].x-dots[b].x;
         var dy=dots[a].y-dots[b].y;
-        var distSq=dx*dx+dy*dy;
-        if(distSq<linkDistSq){
-          var alpha=1-(distSq/linkDistSq);
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<linkDist){
+          var alpha=1-(dist/linkDist);
           ctx.strokeStyle='rgba(0,255,255,'+(alpha*0.11)+')';
-          ctx.lineWidth=.8;
+          ctx.lineWidth=.95;
           ctx.beginPath();
           ctx.moveTo(dots[a].x,dots[a].y);
           ctx.lineTo(dots[b].x,dots[b].y);
@@ -1268,11 +1230,11 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
       for(var k=0;k<dots.length;k++){
         var px=dots[k].x-pointer.x;
         var py=dots[k].y-pointer.y;
-        var pdSq=px*px+py*py;
-        if(pdSq<pointerDistSq){
-          var pa=1-(pdSq/pointerDistSq);
-          ctx.strokeStyle='rgba(240,165,0,'+(pa*0.18)+')';
-          ctx.lineWidth=1;
+        var pd=Math.sqrt(px*px+py*py);
+        if(pd<pointerDist){
+          var pa=1-(pd/pointerDist);
+          ctx.strokeStyle='rgba(240,165,0,'+(pa*0.22)+')';
+          ctx.lineWidth=1.25;
           ctx.beginPath();
           ctx.moveTo(dots[k].x,dots[k].y);
           ctx.lineTo(pointer.x,pointer.y);
@@ -1297,7 +1259,7 @@ if(openFromQuery)renderInlineProject(openFromQuery,{skipScroll:true});
     if(e.touches&&e.touches[0])onMove(e.touches[0]);
   },{passive:true});
   window.addEventListener('touchend',onLeave);
-  resizeCanvas(); initDots(); requestAnimationFrame(draw);
+  resizeCanvas(); initDots(); draw();
 })();
 })();
 </script>

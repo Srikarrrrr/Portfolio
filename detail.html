@@ -93,8 +93,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;b
 .nav-footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,255,.42),transparent)}
 
 /* CURSOR */
-#cdot{position:fixed;top:0;left:0;width:10px;height:10px;background:#00FFFF;border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 12px rgba(0,255,255,.9),0 0 24px rgba(0,255,255,.45);will-change:transform,opacity;opacity:0;transform:translate3d(-100px,-100px,0) translate(-50%,-50%)}
-#cring{position:fixed;top:0;left:0;width:34px;height:34px;border:1.75px solid rgba(0,255,255,.95);border-radius:50%;pointer-events:none;z-index:9998;box-shadow:0 0 18px rgba(0,255,255,.38),inset 0 0 10px rgba(0,255,255,.12);background:rgba(0,255,255,.04);will-change:transform,opacity;opacity:0;transform:translate3d(-100px,-100px,0) translate(-50%,-50%)}
+#cdot{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--c);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 10px var(--c);mix-blend-mode:screen;will-change:transform,opacity}
+#cring{position:fixed;top:0;left:0;width:32px;height:32px;border:2px solid var(--c);border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:screen;will-change:transform,opacity;border-color:rgba(0,255,255,.7)}
+@media(hover:hover) and (pointer:fine){*,*::before,*::after{cursor:none!important}}
+@media(hover:none),(pointer:coarse){body{cursor:auto}#cdot,#cring{display:none}}
 body.custom-cursor-active,body.custom-cursor-active *,body.custom-cursor-active *::before,body.custom-cursor-active *::after{cursor:none!important}
 
 /* AI AGENT SPECIAL HERO */
@@ -912,46 +914,29 @@ function renderProject(pid){
 var pid=getProjectId();
 renderProject(pid);
 
-var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var cdot=document.getElementById('cdot');
-var cring=document.getElementById('cring');
-var mouseX=window.innerWidth/2;
-var mouseY=window.innerHeight/2;
-var dotX=mouseX, dotY=mouseY;
-var ringX=mouseX, ringY=mouseY;
-var targetOpacity=0.72;
-var customCursorActive=false;
-document.body.classList.remove('custom-cursor-active');
-document.body.style.cursor='auto';
-function activateCustomCursor(){
-  if(customCursorActive||prefersReducedMotion||!cdot||!cring)return;
-  customCursorActive=true;
-  document.body.classList.add('custom-cursor-active');
-  document.body.style.cursor='none';
-}
-
-function animateCursor(){
-  if(customCursorActive&&cdot&&cring){
-    dotX+=(mouseX-dotX)*0.35;
-    dotY+=(mouseY-dotY)*0.35;
-    ringX+=(mouseX-ringX)*0.12;
-    ringY+=(mouseY-ringY)*0.12;
+(function(){
+'use strict';
+var cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
+var hasFinePointer=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+var mx=innerWidth*.5,my=innerHeight*.5;
+var dotX=mx,dotY=my,ringX=mx,ringY=my,targetOpacity=.72;
+if(hasFinePointer){document.body.style.cursor='none';}else{document.body.style.cursor='auto';}
+window.addEventListener('mousemove',function(e){
+  mx=e.clientX;my=e.clientY;
+});
+window.addEventListener('mouseover',function(){targetOpacity=.72;});
+window.addEventListener('mouseout',function(){targetOpacity=0;});
+(function bgRaf(){
+  if(hasFinePointer&&cdot&&cring){
+    dotX+=(mx-dotX)*0.35;dotY+=(my-dotY)*0.35;
+    ringX+=(mx-ringX)*0.12;ringY+=(my-ringY)*0.12;
     cdot.style.transform='translate3d('+dotX.toFixed(2)+'px,'+dotY.toFixed(2)+'px,0) translate(-50%,-50%)';
     cring.style.transform='translate3d('+ringX.toFixed(2)+'px,'+ringY.toFixed(2)+'px,0) translate(-50%,-50%)';
-    cdot.style.opacity='1';
     cring.style.opacity=(parseFloat(cring.style.opacity||'0.72')+(targetOpacity-parseFloat(cring.style.opacity||'0.72'))*.2).toFixed(3);
   }
-  requestAnimationFrame(animateCursor);
-}
-
-window.addEventListener('mousemove',function(e){
-  activateCustomCursor();
-  mouseX=e.clientX;
-  mouseY=e.clientY;
-});
-window.addEventListener('mouseover',function(){targetOpacity=0.72;});
-window.addEventListener('mouseout',function(e){if(!e.relatedTarget)targetOpacity=0;});
-animateCursor();
+  requestAnimationFrame(bgRaf);
+})();
+})();
 
 var canvas=document.getElementById('dot-canvas');
 var ctx=canvas.getContext('2d');
